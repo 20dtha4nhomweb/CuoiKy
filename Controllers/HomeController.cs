@@ -67,23 +67,34 @@ namespace CuoiKy.Controllers
             return View();
         }
 
-        public ActionResult NhapThongTin()
+        public ActionResult Login()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NhapThongTin(KhachHang kh)
+        public ActionResult Login(string tenTK, string matKhau)
         {
             if (ModelState.IsValid)
             {
-                    context.Configuration.ValidateOnSaveEnabled = false;
-                    context.KhachHangs.Add(kh);
-                    context.SaveChanges();
-                    return RedirectToAction("Resigter");                    
+                var data = context.TaiKhoans.Where(s=>s.TenDangNhap.Equals(tenTK)&&s.MatKhau.Equals(matKhau));
+                if(data.Count() > 0)
+                {
+                    Session["idUser"] = data.FirstOrDefault().TenDangNhap;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
+                    return RedirectToAction("Login");
+                }
             }
             return View();
         }
+        
+
+
+
+
     }
 }

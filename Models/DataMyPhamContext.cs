@@ -8,14 +8,13 @@ namespace CuoiKy.Models
     public partial class DataMyPhamContext : DbContext
     {
         public DataMyPhamContext()
-            : base("name=DataMyPhamContext")
+            : base("name=DataMyPhamContext1")
         {
         }
 
         public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<DonHang> DonHangs { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhanHieu> NhanHieux { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
@@ -37,14 +36,6 @@ namespace CuoiKy.Models
                 .HasMany(e => e.ChiTietDonHangs)
                 .WithRequired(e => e.DonHang)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KhachHang>()
-                .Property(e => e.Email)
-                .IsFixedLength();
-
-            modelBuilder.Entity<KhachHang>()
-                .Property(e => e.GioiTinh)
-                .IsFixedLength();
 
             modelBuilder.Entity<NhanHieu>()
                 .HasMany(e => e.SanPhams)
@@ -70,14 +61,21 @@ namespace CuoiKy.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.QuyenHan)
+                .Property(e => e.MatKhau)
                 .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.MatKhau)
-                .IsFixedLength()
-                .IsUnicode(false);
+                .Property(e => e.SDT)
+                .IsFixedLength();
+
+            modelBuilder.Entity<TaiKhoan>()
+                .Property(e => e.GioiTinh)
+                .IsFixedLength();
+
+            modelBuilder.Entity<TaiKhoan>()
+                .Property(e => e.DiaChi)
+                .IsFixedLength();
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasMany(e => e.ChiTietDonHangs)

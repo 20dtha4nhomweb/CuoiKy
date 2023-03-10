@@ -1,4 +1,4 @@
-    namespace CuoiKy.Models
+namespace CuoiKy.Models
 {
     using System;
     using System.Collections.Generic;
