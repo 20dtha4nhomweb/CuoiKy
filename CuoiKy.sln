@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuoiKy", "CuoiKy.csproj", "{0FF2BC40-F487-4786-B36C-C08F701C77EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FF2BC40-F487-4786-B36C-C08F701C77EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF2BC40-F487-4786-B36C-C08F701C77EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF2BC40-F487-4786-B36C-C08F701C77EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF2BC40-F487-4786-B36C-C08F701C77EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {159EF3FC-83EF-467D-8741-74E0F7B84E02}
+	EndGlobalSection
+EndGlobal
