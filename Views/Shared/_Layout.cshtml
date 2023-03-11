@@ -20,7 +20,7 @@
             </div>
             <div class="navbar-right">
                 @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Resigter", "Resigter", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Đăng ký", "Create", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,6 +28,9 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                    <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                    <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                    <li></li>
                 </ul>
             </div>
         </div>

@@ -54,5 +54,20 @@ namespace CuoiKy.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }
+        public class LoginViewModel
+        {
+            [Required]
+            [Display(Name = "TaiKhoan")]
+            [EmailAddress]
+            public string TaiKhoan { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            [Display(Name = "Remember me?")]
+            public bool RememberMe { get; set; }
+        }
     }
 }

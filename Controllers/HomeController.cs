@@ -43,30 +43,31 @@ namespace CuoiKy.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Resigter(TaiKhoan tk)
-        {
-            if(ModelState.IsValid)
-            {
-                var check = context.TaiKhoans.FirstOrDefault(a => a.TenDangNhap == a.TenDangNhap);
-                if (check != null)
-                {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Resigter(TaiKhoan tk)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var check = context.TaiKhoans.FirstOrDefault(a => a.TenDangNhap == a.TenDangNhap);
+        //        if (check != null)
+        //        {
 
-                    context.Configuration.ValidateOnSaveEnabled = false;
-                    context.TaiKhoans.Add(tk);
-                    context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.error = "Tên tài khoản đã tồn tại";
-                    return View();
-                }                   
-            }
-            return View();
-        }
+        //            context.Configuration.ValidateOnSaveEnabled = false;
+        //            context.TaiKhoans.Add(tk);
+        //            context.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Tên tài khoản đã tồn tại";
+        //            return View();
+        //        }
+        //    }
+        //    return View();
+        //}
 
+        //Login chưa được
         public ActionResult Login()
         {
             return View();
