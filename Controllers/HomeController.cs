@@ -38,11 +38,6 @@ namespace CuoiKy.Controllers
             return View();
         }
 
-        public ActionResult Resigter()
-        {
-            return View();
-        }
-
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Resigter(TaiKhoan tk)
@@ -68,30 +63,30 @@ namespace CuoiKy.Controllers
         //}
 
         //Login chưa được
-        public ActionResult Login()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(string tenTK, string matKhau)
-        {
-            if (ModelState.IsValid)
-            {
-                var data = context.TaiKhoans.Where(s=>s.TenDangNhap.Equals(tenTK)&&s.MatKhau.Equals(matKhau));
-                if(data.Count() > 0)
-                {
-                    Session["idUser"] = data.FirstOrDefault().TenDangNhap;
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
-                    return RedirectToAction("Login");
-                }
-            }
-            return View();
-        }
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Login(string tenTK, string matKhau)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var data = context.TaiKhoans.Where(s=>s.TenDangNhap.Equals(tenTK)&&s.MatKhau.Equals(matKhau));
+        //        if(data.Count() > 0)
+        //        {
+        //            Session["idUser"] = data.FirstOrDefault().TenDangNhap;
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
+        //            return RedirectToAction("Login");
+        //        }
+        //    }
+        //    return View();
+        //}
         
 
 
