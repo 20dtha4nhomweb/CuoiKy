@@ -133,17 +133,53 @@ namespace CuoiKy.Controllers
 
         //
         // POST: /Account/Login
-        public ActionResult Login(string taiKhoan, string password)
+        //public ActionResult Login(string taiKhoan, string password)
+        //{
+        //    var account = db.TaiKhoans.Where(tk => tk.TenDangNhap == taiKhoan).FirstOrDefault();
+        //    if(account != null)
+        //    {
+        //        if(account.MatKhau == password)
+        //        {
+        //            return Redirect("Index");
+        //        }
+        //    }
+        //    return Redirect("Index");
+        //}
+
+        public ActionResult Login()
         {
-            var account = db.TaiKhoans.Where(tk => tk.TenDangNhap == taiKhoan).FirstOrDefault();
-            if(account != null)
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(TaiKhoan tk)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    var data = db.TaiKhoans.Where(s => s.TenDangNhap.Equals(tk.TenDangNhap) && s.MatKhau.Equals(tk.MatKhau)).FirstOrDefault();
+            //    if (data != null)
+            //    {
+            //        Session["idUser"] = data.TenDangNhap.ToString();
+            //        return RedirectToAction("Index","Home");
+            //    }
+            //    else
+            //    {
+            //        ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
+            //        return RedirectToAction("Index","Home");
+            //    }
+            //}
+            //return View();
+            var data = db.TaiKhoans.Where(s => s.TenDangNhap.Equals(tk.TenDangNhap) && s.MatKhau.Equals(tk.MatKhau)).FirstOrDefault();
+            if (data != null)
             {
-                if(account.MatKhau == password)
-                {
-                    return Redirect("Index");
-                }
+                Session["idUser"] = data.TenDangNhap.ToString();
+                return RedirectToAction("Index", "Home");
             }
-            return Redirect("Index");
+            else
+            {
+                ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

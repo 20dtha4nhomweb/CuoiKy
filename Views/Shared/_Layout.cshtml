@@ -19,8 +19,9 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-right">
-                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Login", "Login", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Đăng ký", "Create", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                <h1>@Session["idUser"]</h1>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

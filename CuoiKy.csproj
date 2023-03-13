@@ -350,7 +350,6 @@
     <Content Include="Views\SanPhams\Edit.cshtml" />
     <Content Include="Views\SanPhams\Index.cshtml" />
     <Content Include="Views\Home\Resigter.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\DanhMucs\Create.cshtml" />
     <Content Include="Views\DanhMucs\Delete.cshtml" />
     <Content Include="Views\DanhMucs\Details.cshtml" />
@@ -366,6 +365,7 @@
     <Content Include="Views\TaiKhoans\Details.cshtml" />
     <Content Include="Views\TaiKhoans\Edit.cshtml" />
     <Content Include="Views\TaiKhoans\Index.cshtml" />
+    <Content Include="Views\TaiKhoans\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
