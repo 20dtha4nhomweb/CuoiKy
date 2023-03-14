@@ -11,17 +11,22 @@ namespace CuoiKy.Controllers
     public class HomeController : Controller
     {
         DataMyPhamContext context = new DataMyPhamContext();
-        public ActionResult Index(int?page)
+        public ActionResult Index(int? page, string SearchString)
         {
+            int pageSize = 20;
+            int pageNum = page ?? 1;
+            var all_SanPham = (from ss in context.SanPhams select ss).OrderBy(m => m.TenSanPham);
+            var all_SanPhamTK = (from ss in context.SanPhams select ss).OrderBy(m => m.TenSanPham).Where(sp => sp.TenSanPham.ToUpper() == SearchString.ToUpper());
             if (page == null)
             {
                 page = 1;
             }
-            var all_SanPham = (from ss in context.SanPhams select ss).OrderBy(m => m.TenSanPham);
-            int pageSize = 20;
-            int pageNum = page ?? 1;
+            if (SearchString != null)
+            {
+                return View(all_SanPhamTK.ToPagedList(pageNum, pageSize));
+            }
+            return View(all_SanPham.ToPagedList(pageNum, pageSize));
 
-            return View(all_SanPham.ToPagedList(pageNum, pageSize));            
         }
 
         public ActionResult About()
