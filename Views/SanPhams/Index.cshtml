@@ -63,7 +63,7 @@
             @Html.DisplayFor(modelItem => item.MoTa)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HinhAnh)
+            <img src="@Html.DisplayFor(modelItem => item.HinhAnh)" width="20%" height="20%" alt="Alternate Text" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MaSP }) |

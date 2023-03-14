@@ -15,8 +15,8 @@ namespace CuoiKy.Controllers
         {
             int pageSize = 20;
             int pageNum = page ?? 1;
-            var all_SanPham = (from ss in context.SanPhams select ss).OrderBy(m => m.TenSanPham);
-            var all_SanPhamTK = (from ss in context.SanPhams select ss).OrderBy(m => m.TenSanPham).Where(sp => sp.TenSanPham.ToUpper() == SearchString.ToUpper());
+            var all_SanPham = context.SanPhams.OrderBy(s => s.TenSanPham);
+            var all_SanPhamTK = context.SanPhams.OrderBy(m => m.TenSanPham).Where(sp => sp.TenSanPham.ToUpper().Contains(SearchString.ToUpper()));
             if (page == null)
             {
                 page = 1;
