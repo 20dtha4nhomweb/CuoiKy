@@ -72,8 +72,6 @@ namespace CuoiKy.Controllers
             }
             return View(taiKhoan);
         }
-
-        // GET: TaiKhoans/Delete/5
         public ActionResult DangKy()
         {
             return View();
@@ -90,7 +88,7 @@ namespace CuoiKy.Controllers
             var diachi = collection["DiaChi"];            
             string temp = dienthoai;
             char check = temp[0];
-            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
+            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["NamSinh"]);
             Regex regexMail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match matchMail = regexMail.Match(email);
             Regex regexPhone = new Regex(@"^(84|0[3|5|7|8|9])+([0-9]{8})\b");
@@ -160,8 +158,9 @@ namespace CuoiKy.Controllers
             if (kh != null)
             {
                 ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
-                Session["TaiKhoan"] = kh;
+                Session["TaiKhoan"] = kh.MaTK;
                 Session["User"] = kh.TenDangNhap;
+                Session["Account"] = kh.PhanQuyen;
             }
             else if (kh == null)
             {
@@ -180,6 +179,86 @@ namespace CuoiKy.Controllers
             Session["TaiKhoan"] = null;
             Session["User"] = null;
             return RedirectToAction("Index", "Home");
+        }
+
+        //Đăng ký tài khoản admin
+        public ActionResult DangKyAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DangKyAdmin(FormCollection collection, TaiKhoan tk)
+        {
+            var tendangnhap = collection["TenDangNhap"];
+            var matkhau = collection["MatKhau"];
+            var MatKhauXacNhan = collection["MatKhauXacNhan"];
+            var hoten = collection["TenKhachHang"];
+            var email = collection["Email"];
+            var dienthoai = collection["SDT"];
+            var diachi = collection["DiaChi"];
+            string temp = dienthoai;
+            char check = temp[0];
+            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["NamSinh"]);
+            Regex regexMail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match matchMail = regexMail.Match(email);
+            Regex regexPhone = new Regex(@"^(84|0[3|5|7|8|9])+([0-9]{8})\b");
+            Match matchPhone = regexPhone.Match(dienthoai);
+            var checkUser = data.TaiKhoans.FirstOrDefault(x => x.TenDangNhap == tendangnhap);
+            if (checkUser != null)
+            {
+                ViewData["UserExist"] = "Tên đăng nhập đã tồn tại";
+                return this.DangKyAdmin();
+            }
+            if ((int)check != 0 && !matchPhone.Success)
+            {
+                ViewData["NumWrong"] = "Num phải đúng định dạng";
+                return this.DangKyAdmin();
+            }
+            if (!matchMail.Success)
+            {
+                ViewData["EmailWrong"] = "Email phải đúng định dạng";
+                return this.DangKyAdmin();
+            }
+            if (DateTime.Parse(ngaysinh) > DateTime.Now)
+            {
+                ViewData["BirthWrong"] = "Ngày sinh phải bé hơn ngày hiện tại";
+                return this.DangKyAdmin();
+            }
+            if (String.IsNullOrEmpty(MatKhauXacNhan))
+            {
+                ViewData["NhapXNMK"] = "Phải nhập mật khẩu xác nhận!";
+            }
+            else
+            {
+                if (!matkhau.Equals(MatKhauXacNhan))
+                {
+                    ViewData["MatKhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
+                }
+                else
+                {
+                    tk.TenDangNhap = tendangnhap;
+                    tk.MatKhau = matkhau;
+                    tk.TenKhachHang = hoten;
+                    tk.Email = email;
+                    tk.SDT = dienthoai;
+                    tk.PhanQuyen = "admin";
+                    tk.NamSinh = DateTime.Parse(ngaysinh);
+                    tk.DiaChi = diachi;
+
+                    data.TaiKhoans.Add(tk);
+                    data.SaveChanges();
+
+                    return RedirectToAction("DangNhap");
+                }
+            }
+            return this.DangKyAdmin();
+        }
+
+        //Page quản lý admin & account khách
+        public ActionResult PageAdmin()
+        {
+            var listAccount = data.TaiKhoans.OrderBy(s => s.PhanQuyen).ToList();
+            return View(listAccount);
         }
     }
 }
