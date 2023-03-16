@@ -25,6 +25,11 @@ namespace CuoiKy.Controllers
             return View(all_SanPham.ToPagedList(pageNum, pageSize));
         }
 
+        public ActionResult SanPhamDetail(int id)
+        {
+            var sanPham = context.SanPhams.Where(sp=>sp.MaSP==id).First();
+            return View(sanPham);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

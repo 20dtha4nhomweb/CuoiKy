@@ -371,6 +371,7 @@
     <Content Include="Views\TaiKhoans\Login.cshtml" />
     <Content Include="Views\TaiKhoans\DangNhap.cshtml" />
     <Content Include="Views\TaiKhoans\DangKy.cshtml" />
+    <Content Include="Views\Home\SanPhamDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
