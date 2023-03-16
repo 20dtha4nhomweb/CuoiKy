@@ -14,17 +14,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using static CuoiKy.Models.TaiKhoan;
+using System.Text.RegularExpressions;
 
 namespace CuoiKy.Controllers
 {
     public class TaiKhoansController : Controller
     {
-        private DataMyPhamContext db = new DataMyPhamContext();
+        private DataMyPhamContext data = new DataMyPhamContext();
 
         // GET: TaiKhoans
         public ActionResult Index()
         {
-            return View(db.TaiKhoans.ToList());
+            return View(data.TaiKhoans.ToList());
         }
 
         // GET: TaiKhoans/Details/5
@@ -34,37 +35,13 @@ namespace CuoiKy.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            TaiKhoan taiKhoan = data.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
             }
             return View(taiKhoan);
         }
-
-        // GET: TaiKhoans/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TaiKhoans/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaTK,TenDangNhap,MatKhau,TenKhachHang,Email,SDT,GioiTinh,NamSinh,DiaChi")] TaiKhoan taiKhoan)
-        {
-            if (ModelState.IsValid)
-            {
-                db.TaiKhoans.Add(taiKhoan);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(taiKhoan);
-        }
-
         // GET: TaiKhoans/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,7 +49,7 @@ namespace CuoiKy.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            TaiKhoan taiKhoan = data.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -89,97 +66,119 @@ namespace CuoiKy.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
+                data.Entry(taiKhoan).State = EntityState.Modified;
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(taiKhoan);
         }
 
         // GET: TaiKhoans/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            if (taiKhoan == null)
-            {
-                return HttpNotFound();
-            }
-            return View(taiKhoan);
-        }
-
-        // POST: TaiKhoans/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            db.TaiKhoans.Remove(taiKhoan);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        //
-        // POST: /Account/Login
-        //public ActionResult Login(string taiKhoan, string password)
-        //{
-        //    var account = db.TaiKhoans.Where(tk => tk.TenDangNhap == taiKhoan).FirstOrDefault();
-        //    if(account != null)
-        //    {
-        //        if(account.MatKhau == password)
-        //        {
-        //            return Redirect("Index");
-        //        }
-        //    }
-        //    return Redirect("Index");
-        //}
-
-        public ActionResult Login()
+        public ActionResult DangKy()
         {
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(TaiKhoan tk)
+        public ActionResult DangKy(FormCollection collection, TaiKhoan tk)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var data = db.TaiKhoans.Where(s => s.TenDangNhap.Equals(tk.TenDangNhap) && s.MatKhau.Equals(tk.MatKhau)).FirstOrDefault();
-            //    if (data != null)
-            //    {
-            //        Session["idUser"] = data.TenDangNhap.ToString();
-            //        return RedirectToAction("Index","Home");
-            //    }
-            //    else
-            //    {
-            //        ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
-            //        return RedirectToAction("Index","Home");
-            //    }
-            //}
-            //return View();
-            var data = db.TaiKhoans.Where(s => s.TenDangNhap.Equals(tk.TenDangNhap) && s.MatKhau.Equals(tk.MatKhau)).FirstOrDefault();
-            if (data != null)
+            var tendangnhap = collection["TenDangNhap"];
+            var matkhau = collection["MatKhau"];
+            var MatKhauXacNhan = collection["MatKhauXacNhan"];
+            var hoten = collection["TenKhachHang"];
+            var email = collection["Email"];
+            var dienthoai = collection["SDT"];
+            var diachi = collection["DiaChi"];
+            string temp = dienthoai;
+            char check = temp[0];
+            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
+            Regex regexMail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match matchMail = regexMail.Match(email);
+            Regex regexPhone = new Regex(@"^(84|0[3|5|7|8|9])+([0-9]{8})\b");
+            Match matchPhone = regexPhone.Match(dienthoai);
+            var checkUser = data.TaiKhoans.FirstOrDefault(x => x.TenDangNhap == tendangnhap);
+            if (checkUser != null)
             {
-                Session["idUser"] = data.TenDangNhap.ToString();
-                return RedirectToAction("Index", "Home");
+                ViewData["UserExist"] = "Tên đăng nhập đã tồn tại";
+                return this.DangKy();
+            }
+            if ((int)check != 0 && !matchPhone.Success)
+            {
+                ViewData["NumWrong"] = "Num phải đúng định dạng";
+                return this.DangKy();
+            }
+            if (!matchMail.Success)
+            {
+                ViewData["EmailWrong"] = "Email phải đúng định dạng";
+                return this.DangKy();
+            }
+            if (DateTime.Parse(ngaysinh) > DateTime.Now)
+            {
+                ViewData["BirthWrong"] = "Ngày sinh phải bé hơn ngày hiện tại";
+                return this.DangKy();
+            }
+            if (String.IsNullOrEmpty(MatKhauXacNhan))
+            {
+                ViewData["NhapXNMK"] = "Phải nhập mật khẩu xác nhận!";
             }
             else
             {
-                ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác!";
-                return RedirectToAction("Index", "Home");
+                if (!matkhau.Equals(MatKhauXacNhan))
+                {
+                    ViewData["MatKhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
+                }
+                else
+                {
+                    tk.TenDangNhap = tendangnhap;
+                    tk.MatKhau = matkhau;
+                    tk.TenKhachHang = hoten;
+                    tk.Email = email;
+                    tk.SDT = dienthoai;
+                    //tk.ngaysinh = DateTime.Parse(ngaysinh);
+                    tk.DiaChi = diachi;
+
+                    data.TaiKhoans.Add(tk);
+                    data.SaveChanges();
+
+                    return RedirectToAction("DangNhap");
+                }
             }
+            return this.DangKy();
+        }
+
+        [HttpGet]
+        public ActionResult DangNhap()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DangNhap(FormCollection collection)
+        {
+            var tendangnhap = collection["TenDangNhap"];
+            var matkhau = collection["MatKhau"];
+            TaiKhoan kh = data.TaiKhoans.FirstOrDefault(x => x.TenDangNhap == tendangnhap);
+            if (kh != null)
+            {
+                ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
+                Session["TaiKhoan"] = kh;
+                Session["User"] = kh.TenDangNhap;
+            }
+            else if (kh == null)
+            {
+                ViewData["ErrorAccount"] = "Tên đăng nhập không tồn tại";
+                return this.DangNhap();
+            }
+            else
+            {
+                ViewData["ErrorPass"] = "Mật khẩu không đúng";
+                return this.DangNhap();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Logout()
+        {
+            Session["TaiKhoan"] = null;
+            Session["User"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }
