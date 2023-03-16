@@ -373,6 +373,7 @@
     <Content Include="Views\TaiKhoans\DangKy.cshtml" />
     <Content Include="Views\TaiKhoans\DangKyAdmin.cshtml" />
     <Content Include="Views\TaiKhoans\PageAdmin.cshtml" />
+    <Content Include="Views\Home\SanPhamDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
