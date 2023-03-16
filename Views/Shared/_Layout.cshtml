@@ -21,23 +21,33 @@
             <div class="navbar-right">
                 @if (Session["TaiKhoan"] == null)
                 {
-                    @Html.ActionLink("Đăng nhập", "DangNhap", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Đăng nhập", "DangNhap", "TaiKhoans", new { area = ""  }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Đăng ký", "DangKy", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (Session["Account"].ToString().Contains("admin"))
+                {
+                    @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
-                    @Html.ActionLink("Xin chào " + @Session["User"], "DangNhap", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
                 }
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
-                    <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
-                    <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                    @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
+                    {
+                        <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                        <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                        <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                    }
                     <li></li>
                 </ul>
             </div>
