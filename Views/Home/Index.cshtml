@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<CuoiKy.Models.SanPham>
 @using PagedList.Mvc;
+<link href="~/Content/DropDown.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,10 +10,10 @@
 <div class="row">
     @using (Html.BeginForm())
     {
-        <div class="form-group form-inline">
+        <div style="text-align:center" class="form-group form-inline">
             Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
             <input type="submit" class="btn btn-default" value="Search" />
-        </div>
+        </div>        
     }
     @foreach (var item in Model)
     {
@@ -24,9 +25,10 @@
                 <div class="panel-body">
                     <p><strong>Giá: </strong>@item.Gia</p>
                     <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
+                    <p><strong>Danh mục: </strong>@item.DanhMuc.TenDanhMuc</p>
+                    <p><strong>Nhãn hiệu: </strong>@item.NhanHieu.TenNhanHieu</p>
                     <p><img width="40%" height="40%" src="@item.HinhAnh" alt="hinh thumnail"></p>
                 </div>
-
             </div>
         </div>
     }

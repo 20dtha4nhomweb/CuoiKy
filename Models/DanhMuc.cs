@@ -5,6 +5,7 @@ namespace CuoiKy.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("DanhMuc")]
     public partial class DanhMuc
@@ -23,5 +24,7 @@ namespace CuoiKy.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
+
+
     }
 }
