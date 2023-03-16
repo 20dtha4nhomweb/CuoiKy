@@ -297,9 +297,9 @@
     <Compile Include="Models\ChiTietDonHang.cs" />
     <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DanhMuc.cs" />
-    <Compile Include="Models\DataMyPhamContext.cs" />
     <Compile Include="Models\DonHang.cs" />
     <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\DataMyPhamContext.cs" />
     <Compile Include="Models\NhanHieu.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\TaiKhoan.cs" />

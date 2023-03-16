@@ -22,32 +22,28 @@ namespace CuoiKy.Models
         [StringLength(50)]
         public string TenDangNhap { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string MatKhau { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string TenKhachHang { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(10)]
         public string SDT { get; set; }
 
-        [Required]
         [StringLength(10)]
         public string GioiTinh { get; set; }
 
-        [Required]
-        public int? NamSinh { get; set; }
+        public DateTime? NamSinh { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string DiaChi { get; set; }
+
+        [StringLength(10)]
+        public string PhanQuyen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }

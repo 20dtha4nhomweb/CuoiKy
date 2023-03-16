@@ -87,7 +87,7 @@ namespace CuoiKy.Controllers
             var hoten = collection["TenKhachHang"];
             var email = collection["Email"];
             var dienthoai = collection["SDT"];
-            var diachi = collection["DiaChi"];
+            var diachi = collection["DiaChi"];            
             string temp = dienthoai;
             char check = temp[0];
             var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
@@ -133,7 +133,8 @@ namespace CuoiKy.Controllers
                     tk.TenKhachHang = hoten;
                     tk.Email = email;
                     tk.SDT = dienthoai;
-                    //tk.ngaysinh = DateTime.Parse(ngaysinh);
+                    tk.PhanQuyen = "user";
+                    tk.NamSinh = DateTime.Parse(ngaysinh);
                     tk.DiaChi = diachi;
 
                     data.TaiKhoans.Add(tk);

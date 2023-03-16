@@ -8,7 +8,7 @@ namespace CuoiKy.Models
     public partial class DataMyPhamContext : DbContext
     {
         public DataMyPhamContext()
-            : base("name=DataMyPhamContext1")
+            : base("name=DataMyPhamContext")
         {
         }
 
@@ -74,7 +74,7 @@ namespace CuoiKy.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.DiaChi)
+                .Property(e => e.PhanQuyen)
                 .IsFixedLength();
 
             modelBuilder.Entity<TaiKhoan>()
