@@ -47,6 +47,11 @@ namespace CuoiKy.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<SanPham>()
+                .HasMany(e => e.DanhGias)
+                .WithRequired(e => e.SanPham)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SanPham>()
                 .HasMany(e => e.ChiTietDonHangs)
                 .WithRequired(e => e.SanPham)
                 .WillCascadeOnDelete(false);
@@ -76,6 +81,11 @@ namespace CuoiKy.Models
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.PhanQuyen)
                 .IsFixedLength();
+
+            modelBuilder.Entity<TaiKhoan>()
+                .HasMany(e => e.DanhGias)
+                .WithRequired(e => e.TaiKhoan)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasMany(e => e.ChiTietDonHangs)
