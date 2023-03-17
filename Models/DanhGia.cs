@@ -9,16 +9,12 @@ namespace CuoiKy.Models
     [Table("DanhGia")]
     public partial class DanhGia
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DanhGia()
-        {
-            ChiTietDonHangs = new HashSet<ChiTietDonHang>();
-        }
-
         [Key]
         public int MaDG { get; set; }
 
-        public int MaDH { get; set; }
+        public int MaTK { get; set; }
+
+        public int MaSP { get; set; }
 
         [StringLength(500)]
         public string NoiDung { get; set; }
@@ -30,7 +26,8 @@ namespace CuoiKy.Models
 
         public DateTime? Ngay { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        public virtual SanPham SanPham { get; set; }
+
+        public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

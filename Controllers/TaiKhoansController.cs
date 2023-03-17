@@ -62,13 +62,13 @@ namespace CuoiKy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaTK,TenDangNhap,MatKhau,TenKhachHang,Email,SDT,GioiTinh,NamSinh,DiaChi")] TaiKhoan taiKhoan)
+        public ActionResult Edit([Bind(Include = "MaTK,TenDangNhap,MatKhau,TenKhachHang,Email,SDT,GioiTinh,NamSinh,DiaChi,PhanQuyen")] TaiKhoan taiKhoan)
         {
             if (ModelState.IsValid)
             {
                 data.Entry(taiKhoan).State = EntityState.Modified;
                 data.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("PageAdmin");
             }
             return View(taiKhoan);
         }

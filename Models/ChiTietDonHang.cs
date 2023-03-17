@@ -33,8 +33,6 @@ namespace CuoiKy.Models
 
         public DateTime? NgayGiao { get; set; }
 
-        public virtual DanhGia DanhGia { get; set; }
-
         public virtual DonHang DonHang { get; set; }
 
         public virtual SanPham SanPham { get; set; }

@@ -12,6 +12,7 @@ namespace CuoiKy.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaiKhoan()
         {
+            DanhGias = new HashSet<DanhGia>();
             ChiTietDonHangs = new HashSet<ChiTietDonHang>();
             GioHangs = new HashSet<GioHang>();
         }
@@ -44,6 +45,9 @@ namespace CuoiKy.Models
 
         [StringLength(10)]
         public string PhanQuyen { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
