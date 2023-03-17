@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-right">
                 @if (Session["TaiKhoan"] == null)
@@ -48,6 +48,7 @@
                         <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
                         <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
                     }
+                    <li>@Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")</li>
                     <li></li>
                 </ul>
             </div>

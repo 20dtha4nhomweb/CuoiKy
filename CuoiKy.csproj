@@ -287,6 +287,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DanhMucsController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NhanHieuxController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
@@ -476,6 +477,8 @@
     <Content Include="Views\TaiKhoans\DangKyAdmin.cshtml" />
     <Content Include="Views\TaiKhoans\PageAdmin.cshtml" />
     <Content Include="Views\Home\SanPhamDetail.cshtml" />
+    <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\GioHang\GioHangPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

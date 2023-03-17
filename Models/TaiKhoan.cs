@@ -13,7 +13,7 @@ namespace CuoiKy.Models
         public TaiKhoan()
         {
             DanhGias = new HashSet<DanhGia>();
-            ChiTietDonHangs = new HashSet<ChiTietDonHang>();
+            DonHangs = new HashSet<DonHang>();
             GioHangs = new HashSet<GioHang>();
         }
 
@@ -50,7 +50,7 @@ namespace CuoiKy.Models
         public virtual ICollection<DanhGia> DanhGias { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        public virtual ICollection<DonHang> DonHangs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }

@@ -17,14 +17,7 @@ namespace CuoiKy.Models
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MaTK { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaDH { get; set; }
-
-        public int? MaDG { get; set; }
 
         public int? SoLuong { get; set; }
 
@@ -36,7 +29,5 @@ namespace CuoiKy.Models
         public virtual DonHang DonHang { get; set; }
 
         public virtual SanPham SanPham { get; set; }
-
-        public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

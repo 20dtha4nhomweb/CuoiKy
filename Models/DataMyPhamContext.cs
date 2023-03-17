@@ -8,7 +8,7 @@ namespace CuoiKy.Models
     public partial class DataMyPhamContext : DbContext
     {
         public DataMyPhamContext()
-            : base("name=DataMyPhamContext")
+            : base("name=DataMyPhamContext1")
         {
         }
 
@@ -88,7 +88,7 @@ namespace CuoiKy.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaiKhoan>()
-                .HasMany(e => e.ChiTietDonHangs)
+                .HasMany(e => e.DonHangs)
                 .WithRequired(e => e.TaiKhoan)
                 .WillCascadeOnDelete(false);
 

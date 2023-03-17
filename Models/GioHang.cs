@@ -5,10 +5,12 @@ namespace CuoiKy.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("GioHang")]
     public partial class GioHang
     {
+        DataMyPhamContext data = new DataMyPhamContext();
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -24,5 +26,18 @@ namespace CuoiKy.Models
         public virtual SanPham SanPham { get; set; }
 
         public virtual TaiKhoan TaiKhoan { get; set; }
+
+        public Double? ThanhTien
+        {
+            get { return SanPham.Gia * SoLuong; }
+        }
+
+        public GioHang(int idSP)
+        {
+            MaSP = idSP;
+            SanPham = data.SanPhams.Single(s => s.MaSP == MaSP);
+            //MaTK = user;
+            SoLuong = 1;
+        }
     }
 }

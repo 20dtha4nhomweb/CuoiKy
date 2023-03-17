@@ -35,6 +35,11 @@
                             <a class="btn btn-success" href="@Url.Action("SanPhamDetail", "Home",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
                         </div>
                     </div>
+                    <div class="pull-left">
+                        <div class="DatMua">
+                            <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
