@@ -1,6 +1,8 @@
 ﻿using CuoiKy.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.EnterpriseServices.CompensatingResourceManager;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,11 +15,21 @@ namespace CuoiKy.Controllers
         DataMyPhamContext data = new DataMyPhamContext();
         public List<GioHang> Laygiohang()
         {
+            int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
-            if (lstGiohang == null)
+            var loadGH = data.GioHangs.Where(gh => gh.MaTK == maTK).ToList();
+            foreach(GioHang gh in loadGH)
             {
-                lstGiohang = new List<GioHang>();
-                Session["GioHang"] = lstGiohang;
+                gh.SanPham = (SanPham)data.SanPhams.FirstOrDefault(x => x.MaSP == gh.MaSP);
+                gh.TaiKhoan = (TaiKhoan)data.TaiKhoans.FirstOrDefault(x => x.MaTK == gh.MaTK);
+                if(lstGiohang == null)
+                {
+                    lstGiohang = new List<GioHang>();
+                    lstGiohang.Add(gh);
+                }
+                    
+                else 
+                    lstGiohang.Add(gh);
             }
             return lstGiohang;
         }
@@ -28,21 +40,28 @@ namespace CuoiKy.Controllers
             {
                 return RedirectToAction("DangNhap", "TaiKhoans");
             }
+            int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.Find(s => s.MaSP == id);
-            sanpham.MaTK = (int)Session["TaiKhoan"];           
-            var temp = data.GioHangs.FirstOrDefault(gh => gh.MaTK == sanpham.MaTK && gh.MaSP == sanpham.MaSP);
-            if (sanpham == null || temp == null)
+            //GioHang checkGH = data.GioHangs.FirstOrDefault(gh => gh.MaTK == maTK && gh.MaSP == id);
+            GioHang temp = new GioHang(id, maTK);
+            if (sanpham == null)
             {
                 sanpham = new GioHang(id);
-                lstGiohang.Add(sanpham);
-                data.GioHangs.Add(sanpham);
+                sanpham.MaTK = maTK;
+                lstGiohang.Add(sanpham);               
+                temp.SoLuong = sanpham.SoLuong;
+                data.GioHangs.Add(temp);
                 data.SaveChanges();
                 return Redirect(strURL);
             }
-            else
+            else 
             {
+                sanpham.MaTK = maTK;
                 sanpham.SoLuong++;
+                temp.SoLuong++;
+                data.GioHangs.AddOrUpdate(temp);
+                data.SaveChanges();
                 return Redirect(strURL);
             }
         }
@@ -84,6 +103,10 @@ namespace CuoiKy.Controllers
         // GET: GioHang
         public ActionResult GioHang()
         {
+            if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
+            {
+                return RedirectToAction("DangNhap", "TaiKhoans");
+            }
             List<GioHang> lstGiohang = Laygiohang();
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();

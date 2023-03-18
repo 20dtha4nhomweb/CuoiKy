@@ -11,6 +11,8 @@ namespace CuoiKy.Models
     public partial class GioHang
     {
         DataMyPhamContext data = new DataMyPhamContext();
+
+        public GioHang() { }
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -38,6 +40,11 @@ namespace CuoiKy.Models
             SanPham = data.SanPhams.Single(s => s.MaSP == MaSP);
             //MaTK = user;
             SoLuong = 1;
+        }
+        public GioHang(int idSP, int maTK)
+        {
+            this.MaSP= idSP;
+            this.MaTK = maTK;
         }
     }
 }
