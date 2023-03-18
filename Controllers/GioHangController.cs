@@ -57,9 +57,9 @@ namespace CuoiKy.Controllers
             }
             else 
             {
-                sanpham.MaTK = maTK;
-                sanpham.SoLuong++;
-                temp.SoLuong++;
+                sanpham.SoLuong += 1;
+                lstGiohang.Add(sanpham);
+                temp.SoLuong = sanpham.SoLuong; ;
                 data.GioHangs.AddOrUpdate(temp);
                 data.SaveChanges();
                 return Redirect(strURL);
