@@ -476,7 +476,6 @@
     <Content Include="Views\TaiKhoans\DangKy.cshtml" />
     <Content Include="Views\TaiKhoans\DangKyAdmin.cshtml" />
     <Content Include="Views\TaiKhoans\PageAdmin.cshtml" />
-    <Content Include="Views\Home\SanPhamDetail.cshtml" />
     <Content Include="Views\GioHang\GioHang.cshtml" />
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
   </ItemGroup>
