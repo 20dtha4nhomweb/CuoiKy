@@ -18,18 +18,29 @@ namespace CuoiKy.Controllers
             int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             var loadGH = data.GioHangs.Where(gh => gh.MaTK == maTK).ToList();
-            foreach(GioHang gh in loadGH)
+            if (loadGH == null)
             {
-                gh.SanPham = (SanPham)data.SanPhams.FirstOrDefault(x => x.MaSP == gh.MaSP);
-                gh.TaiKhoan = (TaiKhoan)data.TaiKhoans.FirstOrDefault(x => x.MaTK == gh.MaTK);
-                if(lstGiohang == null)
+                lstGiohang = new List<GioHang>();
+                Session["GioHang"] = lstGiohang;
+            }
+            else
+            {
+                foreach (GioHang gh in loadGH)
                 {
-                    lstGiohang = new List<GioHang>();
-                    lstGiohang.Add(gh);
+                    gh.SanPham = (SanPham)data.SanPhams.FirstOrDefault(x => x.MaSP == gh.MaSP);
+                    gh.TaiKhoan = (TaiKhoan)data.TaiKhoans.FirstOrDefault(x => x.MaTK == gh.MaTK);
+                    if (lstGiohang == null)
+                    {
+                        lstGiohang = new List<GioHang>();
+                        lstGiohang.Add(gh);
+                    }
+                    else
+                    {
+                        if (!lstGiohang.Contains(gh))
+                            lstGiohang.Add(gh);
+                        else Session["GioHang"] = lstGiohang;
+                    }
                 }
-                    
-                else 
-                    lstGiohang.Add(gh);
             }
             return lstGiohang;
         }
