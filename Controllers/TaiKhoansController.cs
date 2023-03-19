@@ -161,6 +161,7 @@ namespace CuoiKy.Controllers
                 Session["TaiKhoan"] = kh.MaTK;
                 Session["User"] = kh.TenDangNhap;
                 Session["Account"] = kh.PhanQuyen;
+                Session["FullTaiKhoan"] = kh;
             }
             else if (kh == null)
             {

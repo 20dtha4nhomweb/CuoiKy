@@ -40,7 +40,7 @@
             @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.SanPham.TenSanPham }))
             {
                 <td>@item.SanPham.Gia VNĐ</td>
-                <td><input type="number" min="" name="txtSolg" value="@item.SoLuong" /></td>
+                <td><input type="number" min="1" name="txtSolg" value="@item.SoLuong" /></td>
                 <td>@Html.DisplayFor(modelItem => item.ThanhTien)</td>
                 <td>
                     <a href="@Url.Action("Detail", "Sach", new {id = item.MaSP})">Chi tiết</a>
@@ -69,10 +69,9 @@
 
     <tr style="font-weight:bold;color:yellow;text-align:right">
         <td colspan="5">
-            @Html.ActionLink("Đặt hàng", "DatHang", "GioHang")
+            @Html.ActionLink("Đặt hàng", "Dathang", "GioHang")
         </td>
     </tr>
-    =
 
 
 </table>

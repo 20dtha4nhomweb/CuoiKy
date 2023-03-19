@@ -18,12 +18,18 @@ namespace CuoiKy.Controllers
             int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             var loadGH = data.GioHangs.Where(gh => gh.MaTK == maTK).ToList();
-            if (loadGH == null)
+            lstGiohang = loadGH;
+            if (lstGiohang == null)
             {
                 lstGiohang = new List<GioHang>();
                 Session["GioHang"] = lstGiohang;
             }
-            else
+            //else if (lstGiohang == null)
+            //{
+            //    lstGiohang = new List<GioHang>();
+            //    Session["GioHang"] = lstGiohang;
+            //}
+            else 
             {
                 foreach (GioHang gh in loadGH)
                 {
@@ -42,6 +48,7 @@ namespace CuoiKy.Controllers
                     }
                 }
             }
+            //Session["GioHang"] = lstGiohang;
             return lstGiohang;
         }
 
@@ -53,8 +60,8 @@ namespace CuoiKy.Controllers
             }
             int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Laygiohang();
+            //lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.Find(s => s.MaSP == id);
-            //GioHang checkGH = data.GioHangs.FirstOrDefault(gh => gh.MaTK == maTK && gh.MaSP == id);
             GioHang temp = new GioHang(id, maTK);
             if (sanpham == null)
             {
@@ -81,6 +88,7 @@ namespace CuoiKy.Controllers
         {
             int? tsl = 0;
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            lstGiohang = Laygiohang();
             if (lstGiohang != null)
             {
                 tsl = lstGiohang.Sum(s => s.SoLuong);
@@ -92,6 +100,7 @@ namespace CuoiKy.Controllers
         {
             int tsl = 0;
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            lstGiohang = Laygiohang();
             if (lstGiohang != null)
             {
                 tsl = lstGiohang.Count;
@@ -103,6 +112,7 @@ namespace CuoiKy.Controllers
         {
             double? tt = 0;
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            lstGiohang = Laygiohang();
             if (lstGiohang != null)
             {
                 tt = lstGiohang.Sum(n => n.ThanhTien);
@@ -159,6 +169,12 @@ namespace CuoiKy.Controllers
         public ActionResult XoaTatCaGioHang()
         {
             List<GioHang> lstGiohang = Laygiohang();
+            foreach (var item in lstGiohang)
+            {
+                var temp = data.GioHangs.FirstOrDefault(x => x.MaTK == item.MaTK && x.MaSP == item.MaSP);
+                data.GioHangs.Remove(temp);
+                data.SaveChanges();
+            }
             lstGiohang.Clear();
             return RedirectToAction("GioHang");
         }
@@ -170,11 +186,14 @@ namespace CuoiKy.Controllers
             {
                 return RedirectToAction("DangNhap", "TaiKhoans");
             }
+            Session["GioHang"] = null;
+            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            lstGiohang = Laygiohang();
+            Session["GioHang"] = lstGiohang;
             if (Session["GioHang"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            List<GioHang> lstGiohang = Laygiohang();
             ViewBag.TongSoLuong = TongSoLuong();
             ViewBag.TongTien = TongTien();
             ViewBag.TongSoLuongSanPham = TongSoLuongSanPham();
@@ -183,17 +202,19 @@ namespace CuoiKy.Controllers
         public ActionResult Dathang(FormCollection collection)
         {
             DonHang dh = new DonHang();
-            TaiKhoan kh = (TaiKhoan)Session["TaiKhoan"];
+            TaiKhoan kh = (TaiKhoan)Session["FullTaiKhoan"];
             SanPham s = new SanPham();
-            List<GioHang> lstGiohang = Laygiohang();
+            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            //lstGiohang = Laygiohang();
             var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
             dh.MaTK = kh.MaTK;
             dh.NgayLap = DateTime.Now;
-
             data.DonHangs.Add(dh);
             data.SaveChanges();
             foreach (var item in lstGiohang)
             {
+                var temp = data.GioHangs.FirstOrDefault(x => x.MaTK == item.MaTK && x.MaSP == item.MaSP);
+                data.GioHangs.Remove(temp);
                 ChiTietDonHang ctdh = new ChiTietDonHang();
                 ctdh.MaSP = item.MaSP;
                 ctdh.MaDH = dh.MaDH;
@@ -201,6 +222,7 @@ namespace CuoiKy.Controllers
                 ctdh.TinhTrang = "False";
                 ctdh.NgayGiao = DateTime.Parse(ngaygiao);
                 data.ChiTietDonHangs.Add(ctdh);
+                
                 data.SaveChanges();
             }
             data.SaveChanges();
