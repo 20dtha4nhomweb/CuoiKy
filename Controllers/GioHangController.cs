@@ -67,7 +67,7 @@ namespace CuoiKy.Controllers
             {
                 sanpham = new GioHang(id);
                 sanpham.MaTK = maTK;
-                lstGiohang.Add(sanpham);               
+                lstGiohang.Add(sanpham);                
                 temp.SoLuong = sanpham.SoLuong;
                 data.GioHangs.Add(temp);
                 data.SaveChanges();
@@ -203,7 +203,7 @@ namespace CuoiKy.Controllers
         {
             DonHang dh = new DonHang();
             TaiKhoan kh = (TaiKhoan)Session["FullTaiKhoan"];
-            SanPham s = new SanPham();
+            SanPham s = new SanPham();         
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             //lstGiohang = Laygiohang();
             var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
@@ -216,13 +216,15 @@ namespace CuoiKy.Controllers
                 var temp = data.GioHangs.FirstOrDefault(x => x.MaTK == item.MaTK && x.MaSP == item.MaSP);
                 data.GioHangs.Remove(temp);
                 ChiTietDonHang ctdh = new ChiTietDonHang();
+                s = data.SanPhams.Find(item.MaSP);
                 ctdh.MaSP = item.MaSP;
                 ctdh.MaDH = dh.MaDH;
                 ctdh.SoLuong = item.SoLuong;
                 ctdh.TinhTrang = "False";
-                ctdh.NgayGiao = DateTime.Parse(ngaygiao);
+                ctdh.NgayGiao = DateTime.Parse(ngaygiao);                
+                s.SoLuongTon -= item.SoLuong;
                 data.ChiTietDonHangs.Add(ctdh);
-                
+                data.SanPhams.AddOrUpdate(s);
                 data.SaveChanges();
             }
             data.SaveChanges();

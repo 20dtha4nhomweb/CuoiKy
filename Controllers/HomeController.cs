@@ -13,8 +13,7 @@ namespace CuoiKy.Controllers
     {
         DataMyPhamContext context = new DataMyPhamContext();        
         public ActionResult Index(int? page, string SearchString)
-        {           
-            
+        {                      
             int pageSize = 9;
             int pageNum = page ?? 1;
             var all_SanPham = context.SanPhams.OrderBy(s => s.TenSanPham);
