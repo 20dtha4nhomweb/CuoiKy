@@ -44,7 +44,7 @@
                 @ViewData["SaiSoLuong"]</td>
                 <td>@Html.DisplayFor(modelItem => item.ThanhTien)</td>
                 <td>
-                    <a href="@Url.Action("Detail", "Sach", new {id = item.MaSP})">Chi tiết</a>
+                    <a href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">Chi tiết</a>
                     | @Html.ActionLink("Xoá", "XoaGiohang", new { @id = item.MaSP })
                 </td>
 

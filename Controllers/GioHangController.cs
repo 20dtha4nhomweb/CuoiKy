@@ -146,10 +146,12 @@ namespace CuoiKy.Controllers
         public ActionResult XoaGiohang(int id)
         {
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.MaSP == id);
+            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.MaSP == id); 
             if (sanpham != null)
             {
                 lstGiohang.RemoveAll(n => n.MaSP == id);
+                data.GioHangs.Remove(sanpham);
+                data.SaveChanges();
                 return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
