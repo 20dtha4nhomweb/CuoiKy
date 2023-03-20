@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.EnterpriseServices.CompensatingResourceManager;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -157,13 +158,16 @@ namespace CuoiKy.Controllers
             return RedirectToAction("GioHang");
         }
 
-        public ActionResult CapnhatGiohang(int id, FormCollection collection)
+        public ActionResult CapnhatGiohang(int id, int soLuong)
         {
             List<GioHang> lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.SingleOrDefault(s => s.MaSP == id);
             if (sanpham != null)
             {
-                sanpham.SoLuong = int.Parse(collection["txtSoLg"].ToString());
+                sanpham.SoLuong = soLuong;
+                data.GioHangs.AddOrUpdate(sanpham);                
+                data.SaveChanges();
+                return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
         }
@@ -222,7 +226,7 @@ namespace CuoiKy.Controllers
                 ctdh.MaSP = item.MaSP;
                 ctdh.MaDH = dh.MaDH;
                 ctdh.SoLuong = item.SoLuong;
-                ctdh.TinhTrang = "False";
+                ctdh.TinhTrang = "Đang giao";
                 ctdh.NgayGiao = DateTime.Parse(ngaygiao);                
                 s.SoLuongTon -= item.SoLuong;
                 data.ChiTietDonHangs.Add(ctdh);
@@ -237,5 +241,6 @@ namespace CuoiKy.Controllers
         {
             return View();
         }
+        
     }
 }
