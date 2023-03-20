@@ -261,5 +261,7 @@ namespace CuoiKy.Controllers
             var listAccount = data.TaiKhoans.OrderBy(s => s.PhanQuyen).ToList();
             return View(listAccount);
         }
+
+        
     }
 }
