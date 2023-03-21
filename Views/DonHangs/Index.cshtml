@@ -32,6 +32,9 @@
         <td>           
             @Html.ActionLink("Details", "Index","ChiTietDonHangs", new { id = item.MaDH })            
         </td>
+        <td>
+            <div><a class="btn btn-success" href="@Url.Action("Index", "ChiTietDonHangs", new {maDH = item.MaDH})">Chi tiết</a></div>
+        </td>
     </tr>
 }
 
