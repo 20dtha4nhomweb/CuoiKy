@@ -5,49 +5,103 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+</head>
 <h2>TẤT CẢ SẢN PHẨM</h2>
 <div class="row">
     @using (Html.BeginForm())
     {
-        <div style="text-align:center" class="form-group form-inline">
-            Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
-            <input type="submit" class="btn btn-default" value="Search" />
-        </div>        
+        @*<div style="text-align:center" class="form-group form-inline">
+                Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="Search" />
+            </div>*@
     }
     @foreach (var item in Model)
     {
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="panel panel-default">
-                <div style="text-align:center" class="panel panel-heading">
-                    @item.TenSanPham
-                </div>
-                <div class="panel-body">
-                    <p><strong>Giá: </strong>@item.Gia</p>
-                    <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
-                    <p><strong>Danh mục: </strong>@item.DanhMuc.TenDanhMuc</p>
-                    <p><strong>Nhãn hiệu: </strong>@item.NhanHieu.TenNhanHieu</p>
-                    <p><img width="40%" height="40%" src="@item.HinhAnh" alt="hinh thumnail"></p>
-                </div>
-                <div class="panel-footer clearfix">
-                    <div class="pull-right">
-                        <div class="ChiTiet">
-                            <a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
-                        </div>
+            <div @*class="panel panel-default"*@>
+                @*<div style="text-align:center" class="panel panel-heading">
+                        @item.TenSanPham
                     </div>
-                    @if (item.SoLuongTon > 0)
-                    {
-                        <div class="pull-left">
-                            <div class="DatMua">
-                                <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                    <div class="panel-body">
+                        <p><strong>Giá: </strong>@item.Gia</p>
+                        <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
+                        <p><strong>Danh mục: </strong>@item.DanhMuc.TenDanhMuc</p>
+                        <p><strong>Nhãn hiệu: </strong>@item.NhanHieu.TenNhanHieu</p>
+                        <p><img width="40%" height="40%" src="@item.HinhAnh" alt="hinh thumnail"></p>
+                    </div>*@
+                <div>
+                    <div class="prod-box">
+                        <div class="prod-i">
+                            <img src="@item.HinhAnh" alt="#" width="40%" height="40%" />
+                        </div>
+                        <div class="prod-dit clearfix">
+                            <div class="dit-t clearfix">
+                                <div class="left-ti">
+                                    <h4>@item.TenSanPham</h4>
+                                    <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
+                                    <p><strong>Nhãn hiệu: @item.DanhMuc.TenDanhMuc</strong></p>
+                                </div>
+                                <a href="#">@item.Gia VNĐ</a>
+                            </div>
+                            <div class="dit-btn clearfix">
+                                <div class="pull-right">
+                                    <div class="ChiTiet">
+                                        <a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
+                                    </div>
+                                </div>
+                                @if (item.SoLuongTon > 0)
+                                {
+                                    <div class="pull-left">
+                                        <div class="DatMua">
+                                            <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="font-size:23px">Đang tạm hết hàng</div>
+                                }
                             </div>
                         </div>
-                    }
-                    else
-                    {
-                        <div style="font-size:23px">Đang tạm hết hàng</div>
-                    }
+                    </div>
                 </div>
+                @*<div class="panel-footer clearfix">
+                        <div class="pull-right">
+                            <div class="ChiTiet">
+                                <a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
+                            </div>
+                        </div>
+                        @if (item.SoLuongTon > 0)
+                        {
+                            <div class="pull-left">
+                                <div class="DatMua">
+                                    <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="font-size:23px">Đang tạm hết hàng</div>
+                        }
+                    </div>*@
             </div>
         </div>
     }
