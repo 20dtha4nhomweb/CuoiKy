@@ -3,13 +3,32 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+</head>
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
+<div class="box-container">
     <div class="form-horizontal">
         <h4>TaiKhoan</h4>
         <hr />
@@ -83,7 +102,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PhanQuyen, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhanQuyen, new { htmlAttributes = new { disable = "disable",@readonly = "readonly", @class = "form-control" } })
+                @Html.EditorFor(model => model.PhanQuyen, new { htmlAttributes = new { disable = "disable", @readonly = "readonly", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PhanQuyen, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -94,8 +113,14 @@
             </div>
         </div>
     </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>
