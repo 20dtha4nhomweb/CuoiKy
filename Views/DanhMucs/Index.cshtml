@@ -4,31 +4,62 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+</head>
 
-<h2>Index</h2>
+<div class="box-container">
+    <h2>Thông tin sản phẩm</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenDanhMuc)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDanhMuc)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenDanhMuc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaDM }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaDM }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaDM })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDanhMuc)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDM }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaDM }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaDM })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
+
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

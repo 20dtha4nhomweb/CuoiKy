@@ -3,7 +3,25 @@
 @{
     ViewBag.Title = "GioHang";
 }
-
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+</head>
 <h2>GioHang</h2>
 <table class="table">
     <tr>
@@ -37,19 +55,16 @@
             <td>
                 <img src="@item.SanPham.HinhAnh" width="180" />
             </td>
-            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.SanPham.TenSanPham }))
+            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
             {
                 <td>@item.SanPham.Gia VNĐ</td>
-                <td><input type="number" min="1" max="@item.SanPham.SoLuongTon" name="txtSolg" value="@item.SoLuong" />
-                @ViewData["SaiSoLuong"]</td>
+                <td><input type="number" min="1" max="@item.SanPham.SoLuongTon" name="txtSolg" value="@item.SoLuong" /></td>
                 <td>@Html.DisplayFor(modelItem => item.ThanhTien)</td>
                 <td>
                     <a href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">Chi tiết</a>
                     | @Html.ActionLink("Xoá", "XoaGiohang", new { @id = item.MaSP })
                 </td>
-
-                <td><input type="submit" value="Cập nhật" class="btn btn-success"</td>
-
+                <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
             }
             <td>
                 @Html.DisplayFor(modelItem => item.ThanhTien)

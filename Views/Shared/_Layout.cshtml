@@ -7,53 +7,118 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-right">
-                @if (Session["TaiKhoan"] == null)
-                {
-                    @Html.ActionLink("Đăng nhập", "DangNhap", "TaiKhoans", new { area = ""  }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Đăng ký", "DangKy", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else if (Session["Account"].ToString().Contains("admin"))
-                {
-                    @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
-                }
-
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
+<body style="background: url(/Content/images/bg-01.jpg) no-repeat center center fixed; background-repeat: no-repeat; background-size: cover; ">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-right">
+                    @if (Session["TaiKhoan"] == null)
                     {
-                        <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
-                        <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
-                        <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                        @Html.ActionLink("Đăng nhập", "DangNhap", "TaiKhoans", new { area = ""  }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Đăng ký", "DangKy", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
                     }
-                    <li>@Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")</li>
-                    <li></li>
-                </ul>
+                    else if (Session["Account"].ToString().Contains("admin"))
+                    {
+                        @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Đăng xuất", "Logout", "TaiKhoans", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
+                        {
+                            <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                            <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                            <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                        }
+                        <li>@Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")</li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 left-rs">
+                    <div class="navbar-header">
+                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/Home/Index">Project</a>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="right-nav">
+                        <div class="login-sr">
+                            <div class="login-signup">
+                                <ul>
+                                    @*<li><a href="">Login</a></li>
+                                       <li><a class="custom-b" href="#">Sign up</a></li>*@
+                                    @if (Session["TaiKhoan"] == null)
+                                    {
+                                        <li>@Html.ActionLink("Login", "DangNhap", "TaiKhoans")</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/DangKy">Sign Up</a></li>
+                                    }
+                                    else if (Session["Account"].ToString().Contains("admin"))
+                                    {
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li>@Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans")</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="help-r hidden-xs">
+                            <div class="help-box">
+                                <ul>
+                                    <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
+                        {
+                            <div class="nav-b hidden-xs">
+                                <div class="nav-box">
+                                    <ul>
+                                        <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                                        <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                                        <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                                    </ul>
+                                </div>
+                            </div> 
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <!--/.container-fluid -->
+    </nav>
     <div class="container body-content">
         @RenderBody()
     </div>

@@ -60,27 +60,33 @@ namespace CuoiKy.Controllers
             }
             int maTK = (int)Session["TaiKhoan"];
             List<GioHang> lstGiohang = Laygiohang();
-            //lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.Find(s => s.MaSP == id);
+            SanPham slSanPham = data.SanPhams.FirstOrDefault(maSP => maSP.MaSP == id);
+            GioHang slGioHang = data.GioHangs.FirstOrDefault(maSP => maSP.MaSP == id);
             GioHang temp = new GioHang(id, maTK);
             if (sanpham == null)
             {
                 sanpham = new GioHang(id);
                 sanpham.MaTK = maTK;
-                lstGiohang.Add(sanpham);                
+                lstGiohang.Add(sanpham);
                 temp.SoLuong = sanpham.SoLuong;
                 data.GioHangs.Add(temp);
                 data.SaveChanges();
                 return Redirect(strURL);
             }
-            else 
+            else
             {
-                sanpham.SoLuong += 1;
-                lstGiohang.Add(sanpham);
-                temp.SoLuong = sanpham.SoLuong; ;
-                data.GioHangs.AddOrUpdate(temp);
-                data.SaveChanges();
-                return Redirect(strURL);
+                if (slGioHang.SoLuong != slSanPham.SoLuongTon)
+                {
+                    sanpham.SoLuong += 1;
+                    lstGiohang.Add(sanpham);
+                    temp.SoLuong = sanpham.SoLuong; ;
+                    data.GioHangs.AddOrUpdate(temp);
+                    data.SaveChanges();
+                    return Redirect(strURL);
+                }
+                else
+                    return Redirect(strURL);
             }
         }
 
@@ -160,10 +166,15 @@ namespace CuoiKy.Controllers
         public ActionResult CapnhatGiohang(int id, FormCollection collection)
         {
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.SingleOrDefault(s => s.MaSP == id);
-            if (sanpham != null)
+            GioHang gioHang = lstGiohang.SingleOrDefault(s => s.MaSP == id);
+            SanPham sanPham = data.SanPhams.SingleOrDefault(sp => sp.MaSP == id);
+            if (gioHang != null)
             {
-                sanpham.SoLuong = int.Parse(collection["txtSoLg"].ToString());
+                int sl = int.Parse(collection["txtSolg"].ToString());
+                gioHang.SoLuong = sl;
+                data.GioHangs.AddOrUpdate(gioHang);
+                data.SaveChanges();
+                return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
         }
