@@ -59,7 +59,7 @@
                             </div>
                             <h4>@item.Gia</h4>
                         </div>
-                        <a href=""><i class="fas fa-shopping-cart cart"></i></a>
+                        <a href="@Url.Action("ThemGioHang","GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString()})"><i class="fas fa-shopping-cart cart"></i></a>
                     </div>
                 </div>
             }

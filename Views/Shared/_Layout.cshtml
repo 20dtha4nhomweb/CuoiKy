@@ -40,7 +40,7 @@
                                     }
                                     else
                                     {
-                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })</li>
+                                        <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
                                         <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
                                     }
                                 </ul>
@@ -50,7 +50,7 @@
                             <div class="help-box">
                                 <ul>
                                     <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
-                                    <li><a class="custom-b" href="/DonHangs?maTK=@Session["User"]">Đơn hàng</a></li>
+                                    <li><a class="custom-b" href="/DonHangs?maTK=@Session["TaiKhoan"]">Đơn hàng</a></li>
                                 </ul>
                             </div>
                         </div>
