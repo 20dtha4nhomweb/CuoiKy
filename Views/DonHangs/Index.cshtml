@@ -25,55 +25,57 @@
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
 </head>
 
-<h2>Các đơn hàng đã thanh toán</h2>
+<div class="box-container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaDH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayLap)
-        </th>
-        <th>
-            Ngày giao
-        </th>
-        <th>
-            Tình trạng
-        </th>
-        <th></th>
-    </tr>
+    <h2 style="text-align: center">Các đơn hàng đã thanh toán</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaDH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayLap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayGiao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TinhTrang)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Index", "ChiTietDonHangs", new { id = item.MaDH })
-        </td>
-        <td>
-            @if (item.TinhTrang != "Đã nhận hàng")
-            {
-                using (Html.BeginForm("DaNhanHang", "DonHangs", new { @maDH = item.MaDH }))
-                {
-                    <input type="submit" value="Đã nhận hàng" class="btn btn-success" />
-                }
-            }
-            </td>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayLap)
+            </th>
+            <th>
+                Ngày giao
+            </th>
+            <th>
+                Tình trạng
+            </th>
+            <th></th>
         </tr>
-}
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaDH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayLap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayGiao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Index", "ChiTietDonHangs", new { id = item.MaDH })
+                </td>
+                <td>
+                    @if (item.TinhTrang != "Đã nhận hàng")
+                    {
+                        using (Html.BeginForm("DaNhanHang", "DonHangs", new { @maDH = item.MaDH }))
+                        {
+                            <input type="submit" value="Đã nhận hàng" class="btn btn-success" />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
