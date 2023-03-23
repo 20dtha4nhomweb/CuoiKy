@@ -24,7 +24,17 @@ namespace CuoiKy.Controllers
             return View(all_SanPham.ToPagedList(pageNum, pageSize));
         }
 
-     
+        public ActionResult IndexAdmin(int? page, string SearchString)
+        {
+            int pageSize = 9;
+            int pageNum = page ?? 1;
+            var all_SanPham = context.SanPhams.OrderBy(s => s.TenSanPham);
+            var all_SanPhamTK = context.SanPhams.OrderBy(m => m.TenSanPham).Where(sp => sp.TenSanPham.ToUpper().Contains(SearchString.ToUpper()));
+            page = 1;
+            if (SearchString != null)
+                return View(all_SanPhamTK.ToPagedList(pageNum, pageSize));
+            return View(all_SanPham.ToPagedList(pageNum, pageSize));
+        }
 
         public ActionResult About()
         {

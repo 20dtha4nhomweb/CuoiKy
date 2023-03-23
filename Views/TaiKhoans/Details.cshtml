@@ -23,88 +23,91 @@
     <!--responsive css-->
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
 </head>
-<h2>Details</h2>
 
-<div>
-    <h4>TaiKhoan</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenDangNhap)
-        </dt>
+<div class="box-container">
+    <h2>Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenDangNhap)
-        </dd>
+    <div>
+        <h4>TaiKhoan</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenDangNhap)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MatKhau)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenDangNhap)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MatKhau)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenKhachHang)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenKhachHang)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TenKhachHang)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenKhachHang)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SDT)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GioiTinh)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.GioiTinh)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NamSinh)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GioiTinh)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NamSinh)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NamSinh)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NamSinh)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhanQuyen)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhanQuyen)
-        </dd>
-        
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhanQuyen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhanQuyen)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaTK }) |
+        @Html.ActionLink("Back to List", "Index", new { atk = Model.MaTK })
+        <div><a class="btn btn-success" href="@Url.Action("Index", "DonHangs", new {maTK = Model.MaTK})">Chi tiết</a></div>
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaTK }) |
-    @Html.ActionLink("Back to List", "Index", new { atk = Model.MaTK })
-    <div><a class="btn btn-success" href="@Url.Action("Index", "DonHangs", new {maTK = Model.MaTK})">Chi tiết</a></div>
-</p>

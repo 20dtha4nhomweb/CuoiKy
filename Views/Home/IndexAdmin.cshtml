@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+</head>
+<body style="background: url(/Content/images/bg-01.jpg) no-repeat center center fixed; background-repeat: no-repeat; background-size: cover; ">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 left-rs">
+                    <div class="navbar-header">
+                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/Home/Index" class="navbar-brand">Project</a>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="right-nav">
+                        <div class="login-sr">
+                            <div class="login-signup">
+                                <ul>
+                                    @*<li><a href="">Login</a></li>
+                                        <li><a class="custom-b" href="#">Sign up</a></li>*@
+                                    @if (Session["TaiKhoan"] == null)
+                                    {
+                                        <li>@Html.ActionLink("Login", "DangNhap", "TaiKhoans")</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/DangKy">Sign Up</a></li>
+                                    }
+                                    else if (Session["Account"].ToString().Contains("admin"))
+                                    {
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li>@Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans")</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="help-r hidden-xs">
+                            <div class="help-box">
+                                <ul>
+                                    <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
+                        {
+                            <div class="nav-b hidden-xs">
+                                <div class="nav-box">
+                                    <ul>
+                                        <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                                        <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                                        <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.container-fluid -->
+    </nav>
+    <div class="box-container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div @*class="panel panel-default"*@>
+                        <div>
+                            <div class="prod-box">
+                                <div class="prod-i">
+                                    <img src="@item.HinhAnh" alt="#" width="40%" height="40%" />
+                                </div>
+                                <div class="prod-dit clearfix">
+                                    <div class="dit-t clearfix">
+                                        <div class="left-ti">
+                                            <h4>@item.TenSanPham</h4>
+                                            <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
+                                            <p><strong>Nhãn hiệu: @item.DanhMuc.TenDanhMuc</strong></p>
+                                        </div>
+                                        <a href="#">@item.Gia VNĐ</a>
+                                    </div>
+                                    <div class="dit-btn clearfix">
+                                        <div class="pull-right">
+                                            <div class="ChiTiet">
+                                                <a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
+                                            </div>
+                                        </div>
+                                        @if (item.SoLuongTon < 0)
+                                        {
+                                            <div style="font-size:23px">Đang tạm hết hàng</div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+</html>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

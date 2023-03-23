@@ -5,51 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-    <meta charset="UTF-8">
-    <title>Chamb - Responsive E-commerce HTML5 Template</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--enable mobile device-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--fontawesome css-->
-    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
-    <!--bootstrap css-->
-    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
-    <!--animate css-->
-    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
-    <!--main css-->
-    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
-    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
-    <!--responsive css-->
-    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
-</head>
+<div class="box-container">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chamb - Responsive E-commerce HTML5 Template</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--enable mobile device-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--fontawesome css-->
+        <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+        <!--bootstrap css-->
+        <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+        <!--animate css-->
+        <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+        <!--main css-->
+        <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+        <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+        <!--responsive css-->
+        <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+    </head>
 
-<h2>Details</h2>
+    <h2>Details</h2>
 
-<div>
-    <h4>DonHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TaiKhoan.TenDangNhap)
-        </dt>
+    <div>
+        <h4>DonHang</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TaiKhoan.TenDangNhap)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TaiKhoan.TenDangNhap)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TaiKhoan.TenDangNhap)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayLap)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayLap)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayLap)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NgayLap)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaDH }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDH }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
