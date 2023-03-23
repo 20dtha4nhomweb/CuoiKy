@@ -38,6 +38,12 @@
         <th>
             @Html.DisplayNameFor(model => model.NgayLap)
         </th>
+        <th>
+            Ngày giao
+        </th>
+        <th>
+            Tình trạng
+        </th>
         <th></th>
     </tr>
 
@@ -49,13 +55,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.NgayLap)
         </td>
-        <td>           
-            @Html.ActionLink("Details", "Index","ChiTietDonHangs", new { id = item.MaDH })            
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayGiao)
         </td>
         <td>
-            <div><a class="btn btn-success" href="@Url.Action("Index", "ChiTietDonHangs", new {maDH = item.MaDH})">Chi tiết</a></div>
+            @Html.DisplayFor(modelItem => item.TinhTrang)
         </td>
-    </tr>
+        <td>
+            @Html.ActionLink("Details", "Index", "ChiTietDonHangs", new { id = item.MaDH })
+        </td>
+        <td>
+            @if (item.TinhTrang != "Đã nhận hàng")
+            {
+                using (Html.BeginForm("DaNhanHang", "DonHangs", new { @maDH = item.MaDH }))
+                {
+                    <input type="submit" value="Đã nhận hàng" class="btn btn-success" />
+                }
+            }
+            </td>
+        </tr>
 }
 
 </table>

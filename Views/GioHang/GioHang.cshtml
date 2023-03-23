@@ -58,7 +58,7 @@
             <td>
                 <img src="@item.SanPham.HinhAnh" width="180" />
             </td>
-            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.SanPham.TenSanPham }))
+            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
             {
                 <td>@item.SanPham.Gia VNĐ</td>
                 <td><input type="number" min="1" max="@item.SanPham.SoLuongTon" name="txtSolg" value="@item.SoLuong" /></td>
@@ -67,7 +67,7 @@
                     <a href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">Chi tiết</a>
                     | @Html.ActionLink("Xoá", "XoaGiohang", new { @id = item.MaSP })
                 </td>
-                <td class="btn btn-success" href="@Url.Action("CapnhatGiohang", "GioHang", new { @id = item.MaSP, @soLuong = item.SoLuong})">Cập nhật</td>
+                <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
             }
             <td>
                 @Html.DisplayFor(modelItem => item.ThanhTien)

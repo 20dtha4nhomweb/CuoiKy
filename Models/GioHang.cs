@@ -43,7 +43,7 @@ namespace CuoiKy.Models
         }
         public GioHang(int idSP, int maTK)
         {
-            this.MaSP= idSP;
+            this.MaSP = idSP;
             this.MaTK = maTK;
         }
     }

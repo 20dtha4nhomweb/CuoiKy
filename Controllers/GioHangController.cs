@@ -158,19 +158,22 @@ namespace CuoiKy.Controllers
             return RedirectToAction("GioHang");
         }
 
-        public ActionResult CapnhatGiohang(int id, int soLuong)
+        public ActionResult CapnhatGiohang(int id, FormCollection collection)
         {
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.SingleOrDefault(s => s.MaSP == id);
-            if (sanpham != null)
+            GioHang gioHang = lstGiohang.SingleOrDefault(s => s.MaSP == id);
+            SanPham sanPham = data.SanPhams.SingleOrDefault(sp => sp.MaSP == id);
+            if (gioHang != null)
             {
-                sanpham.SoLuong = soLuong;
-                data.GioHangs.AddOrUpdate(sanpham);                
+                int sl = int.Parse(collection["txtSolg"].ToString());
+                gioHang.SoLuong = sl;
+                data.GioHangs.AddOrUpdate(gioHang);
                 data.SaveChanges();
                 return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
         }
+
 
         public ActionResult XoaTatCaGioHang()
         {
@@ -225,10 +228,9 @@ namespace CuoiKy.Controllers
                 s = data.SanPhams.Find(item.MaSP);
                 ctdh.MaSP = item.MaSP;
                 ctdh.MaDH = dh.MaDH;
-                ctdh.SoLuong = item.SoLuong;
-                ctdh.TinhTrang = "Đang giao";
-                ctdh.NgayGiao = DateTime.Parse(ngaygiao);                
+                ctdh.SoLuong = item.SoLuong;                           
                 s.SoLuongTon -= item.SoLuong;
+                dh.TinhTrang = "Đang giao";
                 data.ChiTietDonHangs.Add(ctdh);
                 data.SanPhams.AddOrUpdate(s);
                 data.SaveChanges();
