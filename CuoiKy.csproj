@@ -330,6 +330,7 @@
     <Content Include="Content\images\sanpham4.jpg" />
     <Content Include="Content\images\sanpham4.png" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\MakeColor\css\animate-wow.css" />
     <Content Include="Content\MakeColor\css\bootstrap-select.min.css" />
     <Content Include="Content\MakeColor\css\bootstrap.min.css" />
