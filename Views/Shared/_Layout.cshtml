@@ -82,13 +82,13 @@
                                     }
                                     else if (Session["Account"].ToString().Contains("admin"))
                                     {
-                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })</li>
                                         <li>@Html.ActionLink("Quản lý Admin", "PageAdmin", "TaiKhoans")</li>
                                         <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
                                     }
                                     else
                                     {
-                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { @id = Session["TaiKhoan"] })</li>
+                                        <li>@Html.ActionLink("Xin chào " + @Session["User"], "Details", "TaiKhoans", new { area = "", @id = Session["TaiKhoan"] }, new { @class = "navbar-brand" })</li>
                                         <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
                                     }
                                 </ul>

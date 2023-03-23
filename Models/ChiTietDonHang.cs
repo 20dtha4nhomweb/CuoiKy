@@ -21,11 +21,6 @@ namespace CuoiKy.Models
 
         public int? SoLuong { get; set; }
 
-        [StringLength(100)]
-        public string TinhTrang { get; set; }
-
-        public DateTime? NgayGiao { get; set; }
-
         public virtual DonHang DonHang { get; set; }
 
         public virtual SanPham SanPham { get; set; }

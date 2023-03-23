@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -119,6 +120,19 @@ namespace CuoiKy.Controllers
             db.DonHangs.Remove(donHang);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult DaNhanHang(int maDH, FormCollection collection)
+        {
+            DonHang listDonHang = new DonHang();
+            listDonHang = data.DonHangs.FirstOrDefault(id=>id.MaDH == maDH);            
+            if (listDonHang != null)
+            {
+                listDonHang.TinhTrang = "Đã nhận hàng";
+                data.DonHangs.AddOrUpdate(listDonHang);
+                data.SaveChanges();
+            }
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         protected override void Dispose(bool disposing)
