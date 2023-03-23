@@ -23,6 +23,12 @@
     <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
     <!--responsive css-->
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
 </head>
 <div class="box-container">
     <h2>TẤT CẢ SẢN PHẨM</h2>
@@ -30,55 +36,35 @@
         @using (Html.BeginForm())
         {
             @*<div style="text-align:center" class="form-group form-inline">
-                    Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
-                    <input type="submit" class="btn btn-default" value="Search" />
-                </div>*@
+                Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="Search" />
+            </div>*@
         }
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div @*class="panel panel-default"*@>
-                    <div>
-                        <div class="prod-box">
-                            <div class="prod-i">
-                                <img src="@item.HinhAnh" alt="#" width="40%" height="40%" />
+        <section id="product1" >
+
+            @foreach (var item in Model)
+            {
+                <div class="pro-container">
+                    <div class="pro">
+                        <img src="@item.HinhAnh" alt="" />
+                        <div class="desc">
+                            <span>adidas</span>
+                            <h5>@item.TenSanPham</h5>
+                            <div class="start">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half"></i>
                             </div>
-                            <div class="prod-dit clearfix">
-                                <div class="dit-t clearfix">
-                                    <div class="left-ti">
-                                        <h4>@item.TenSanPham</h4>
-                                        <p><strong>Số lượng tồn: </strong>@item.SoLuongTon</p>
-                                        <p><strong>Nhãn hiệu: @item.DanhMuc.TenDanhMuc</strong></p>
-                                    </div>
-                                    <a href="#">@item.Gia VNĐ</a>
-                                </div>
-                                <div class="dit-btn clearfix">
-                                    <div class="pull-right">
-                                        <div class="ChiTiet">
-                                            <a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Chi tiết</a>
-                                        </div>
-                                    </div>
-                                    @if (item.SoLuongTon > 0)
-                                    {
-                                        <div class="pull-left">
-                                            <div class="DatMua">
-                                                <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })">Đặt mua</a>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div style="font-size:23px">Đang tạm hết hàng</div>
-                                    }
-                                </div>
-                            </div>
+                            <h4>@item.Gia</h4>
                         </div>
+                        <a href=""><i class="fas fa-shopping-cart cart"></i></a>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </section>
     </div>
-</div>
 
 <div>
     <div>
