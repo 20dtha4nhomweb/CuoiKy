@@ -25,15 +25,15 @@
 </head>
 
 <div class="box-container">
-    <h2>Thông tin sản phẩm</h2>
+    <h2 style="text-align: center">Thông tin danh mục sản phẩm</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Tạo mới danh mục sản phẩm", "Create")
     </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TenDanhMuc)
+                Tên danh mục
             </th>
             <th></th>
         </tr>
@@ -55,11 +55,3 @@
     </table>
 </div>
 
-<style>
-    .box-container {
-        padding: 25px 20px;
-        border-radius: 10px;
-        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
-        background: rgba(255,255,255, .8);
-    }
-</style>
