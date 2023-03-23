@@ -24,73 +24,72 @@
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
 </head>
 
-<h2>GioHang</h2>
+<div class="box-container">
+    <h2 style="text-align: center">Giỏ hàng</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SanPham.HinhAnh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SanPham.Gia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThanhTien)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSP)
-            </td>
-            <td>
-                <img src="@item.SanPham.HinhAnh" width="180" />
-            </td>
-            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
-            {
-                <td>@item.SanPham.Gia VNĐ</td>
-                <td><input type="number" min="1" max="@item.SanPham.SoLuongTon" name="txtSolg" value="@item.SoLuong" /></td>
-                <td>@Html.DisplayFor(modelItem => item.ThanhTien)</td>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                    <a href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">Chi tiết</a>
-                    | @Html.ActionLink("Xoá", "XoaGiohang", new { @id = item.MaSP })
+                    @Html.DisplayFor(modelItem => item.MaSP)
                 </td>
-                <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.ThanhTien)
+                <td>
+                    <img src="@item.SanPham.HinhAnh" width="180" />
+                </td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.MaSP }))
+                {
+                    <td>@item.SanPham.Gia VNĐ</td>
+                    <td><input type="number" min="1" max="@item.SanPham.SoLuongTon" name="txtSolg" value="@item.SoLuong" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.ThanhTien)</td>
+                    <td>
+                        <a href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">Chi tiết</a>
+                        | @Html.ActionLink("Xoá", "XoaGiohang", new { @id = item.MaSP })
+                    </td>
+                    <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                </td>
+            </tr>
+        }
+        <tr style="font-weight:bold; text-align:left;color:red">
+            <td colspan="2">Số loại sách: @ViewBag.Tongsoluongsanpham</td>
+            <td colspan="2">Số lượng loại sách: @ViewBag.Tongsoluong</td>
+            <td colspan="4">Tổng tiền: @ViewBag.Tongtien VNĐ</td>
+        </tr>
+
+        <tr style="font-weight:bold;color:blue;text-align:right">
+            <td colspan="5">
+                @Html.ActionLink("Xoá giỏ hàng", "XoaTatCaGioHang")
             </td>
         </tr>
-    }
-<tr style="font-weight:bold; text-align:left;color:red">
-    <td colspan="2">Số loại sách: @ViewBag.Tongsoluongsanpham</td>
-    <td colspan="2">Số lượng loại sách: @ViewBag.Tongsoluong</td>    
-    <td colspan="4">Tổng tiền: @ViewBag.Tongtien VNĐ</td>
-</tr>
 
-    <tr style="font-weight:bold;color:blue;text-align:right">
-        <td colspan="5">
-            @Html.ActionLink("Xoá giỏ hàng", "XoaTatCaGioHang")
-        </td>
-    </tr>
-
-    <tr style="font-weight:bold;color:yellow;text-align:right">
-        <td colspan="5">
-            @Html.ActionLink("Đặt hàng", "Dathang", "GioHang")
-        </td>
-    </tr>
+        <tr style="font-weight:bold;color:yellow;text-align:right">
+            <td colspan="5">
+                @Html.ActionLink("Đặt hàng", "Dathang", "GioHang")
+            </td>
+        </tr>
 
 
-</table>
+    </table>
+</div>

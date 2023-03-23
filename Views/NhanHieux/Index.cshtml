@@ -25,30 +25,34 @@
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
 </head>
 
-<h2>Index</h2>
+<div class="box-container">
+    <h2 style="text-align: center">Thông tin nhãn hiệu</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenNhanHieu)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Tên nhãn hiệu
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenNhanHieu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaNH }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaNH }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaNH })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNhanHieu)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNH }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaNH }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNH })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+</div>
