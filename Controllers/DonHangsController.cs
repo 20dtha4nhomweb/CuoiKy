@@ -129,6 +129,7 @@ namespace CuoiKy.Controllers
             if (listDonHang != null)
             {
                 listDonHang.TinhTrang = "Đã nhận hàng";
+                listDonHang.NgayGiao = DateTime.Now;
                 data.DonHangs.AddOrUpdate(listDonHang);
                 data.SaveChanges();
             }

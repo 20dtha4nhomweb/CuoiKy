@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.TinhTrang)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Index", "ChiTietDonHangs", new { id = item.MaDH })
+                    <a href="/ChiTietDonHangs/Index?maDH=@item.MaDH">Details</a>
                 </td>
                 <td>
                     @if (item.TinhTrang != "Đã nhận hàng")

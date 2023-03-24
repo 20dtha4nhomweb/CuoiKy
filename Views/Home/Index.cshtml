@@ -35,37 +35,39 @@
     <div class="row">
         @using (Html.BeginForm())
         {
-            @*<div style="text-align:center" class="form-group form-inline">
+            <div style="text-align:center" class="form-group form-inline">
                 Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
                 <input type="submit" class="btn btn-default" value="Search" />
-            </div>*@
+            </div>
         }
         <section id="product1" >
 
             @foreach (var item in Model)
             {
-                <div class="pro-container">
-                    <div class="pro">
-                        <img src="@item.HinhAnh" alt="" />
-                        <div class="desc">
-                            <span>adidas</span>
-                            <h5>@item.TenSanPham</h5>
-                            <div class="start">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half"></i>
+                <a href="/SanPhams/Details/@item.MaSP">
+                    <div class="pro-container">
+                        <div class="pro">
+                            <img src="@item.HinhAnh" alt="" />
+                            <div class="desc">
+                                <span>@item.NhanHieu.TenNhanHieu</span>
+                                <h5>@item.TenSanPham</h5>
+                                <div class="start">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </div>
+                                <h4>@item.Gia</h4>
                             </div>
-                            <h4>@item.Gia</h4>
+                            <a href="@Url.Action("ThemGioHang","GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString()})"><i class="fas fa-shopping-cart cart"></i></a>
                         </div>
-                        <a href="@Url.Action("ThemGioHang","GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString()})"><i class="fas fa-shopping-cart cart"></i></a>
                     </div>
-                </div>
+                </a>
             }
         </section>
     </div>
-
+</div>
 <div>
     <div>
         Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
