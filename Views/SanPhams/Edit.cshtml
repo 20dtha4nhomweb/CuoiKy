@@ -6,9 +6,11 @@
 }
 
 <head>
+
     <meta charset="UTF-8">
     <title>Chamb - Responsive E-commerce HTML5 Template</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="~/Content/main.css" rel="stylesheet" />
     <!--enable mobile device-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--fontawesome css-->
@@ -100,13 +102,49 @@
                     @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
                     <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
                     <input type="button" id="btnUpload" value="Chọn ảnh đê" class="btn btn-danger" onclick="" />
-                    <img src="" id="pictureUpload" width="20%" height="20%" />
+                    <div style="padding:2rem 0">
+                        <img src="" style="border-radius:10px" id="pictureUpload" width="20%" height="20%" />
+                    </div>
                 </div>
             </div>
+            @section upload
+            {
+                <script>
+                    $(function () {
+                        $('#btnUpload').click(function () {
+                            $('#fileUpload').trigger('click');
+                        });
+                    });
+                    $('#fileUpload').change(function () {
+                        if (window.FormData !== undefined) {
+                            var fileUpload = $('#fileUpload').get(0);
+                            var files = fileUpload.files;
+                            var formData = new FormData();
+                            formData.append('file', files[0]);
+
+                            $.ajax(
+                                {
+                                    type: 'POST',
+                                    url: '/SanPhams/ProcessUpload',
+                                    contentType: false,
+                                    processData: false,
+                                    data: formData,
+                                    success: function (urlImage) {
+                                        $('#pictureUpload').attr('src', urlImage);
+                                        $('#HinhAnh').val(urlImage);
+                                    },
+                                    error: function (err) {
+                                        alert('Error ', err.statusText);
+                                    }
+                                });
+                        }
+                    });
+                </script>
+            }
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" id="btnHover" class=" btn " />
                 </div>
             </div>
 
@@ -117,3 +155,12 @@
         </p>
     }
 </div>
+<style>
+    #btnHover:hover {
+        background: #1d99ff;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

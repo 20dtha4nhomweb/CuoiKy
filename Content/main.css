@@ -757,3 +757,11 @@ footer {
             width: 100% !important;
         }
 }
+#btnHover {
+    background: #09294c;
+    color: #fff;
+}
+
+#btnHover:hover {
+    background: #1d99ff;
+}
