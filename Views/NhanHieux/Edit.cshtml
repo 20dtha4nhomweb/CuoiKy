@@ -26,7 +26,7 @@
 </head>
 
 <div class="box-container">
-    <h2 style="text-align: center">Edit</h2>
+    <h2 style="text-align: center">Chỉnh sửa thông tin nhãn hiệu</h2>
 
 
     @using (Html.BeginForm())
@@ -34,7 +34,6 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Nhãn hiệu</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.MaNH)
