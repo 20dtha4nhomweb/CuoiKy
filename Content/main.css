@@ -231,12 +231,12 @@ p {
 }
 
     #product1 .pro-container {
-        width: 22%;
-        /*display: flex;
+        /*width: 22%;*/
+        display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-        padding-top: 20px;*/
+        padding-top: 20px;
     }
 
     #product1 .pro {
