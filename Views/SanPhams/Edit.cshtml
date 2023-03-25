@@ -98,6 +98,9 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                    <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                    <input type="button" id="btnUpload" value="Chọn ảnh đê" class="btn btn-danger" onclick="" />
+                    <img src="" id="pictureUpload" width="20%" height="20%" />
                 </div>
             </div>
 
