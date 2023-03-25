@@ -173,6 +173,8 @@ namespace CuoiKy.Controllers
                 ViewData["ErrorPass"] = "Mật khẩu không đúng";
                 return this.DangNhap();
             }
+            if (kh.PhanQuyen.Contains("admin"))
+                return RedirectToAction("IndexAdmin","Home");
             return RedirectToAction("Index", "Home");
         }
         public ActionResult Logout()

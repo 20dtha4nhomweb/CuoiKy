@@ -23,18 +23,9 @@
                     </div>
                     <form class="navbar-form navbar-left web-sh">
                         <div class="form">
-                            @*<div class="form-control" placeholder="Search for products or companies">
-                                @Html.TextBox("SearchString", "", new { @class = "form-control" })
-                            </div>*@
                             <div>
-                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"  @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" @Html.TextBox("SearchString", "")
                             </div>
-                            
-                            @*<div style="text-align:center" class="form-group form-inline">
-                                Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
-                                <input type="submit" class="btn btn-default" value="Search" />
-                            </div>*@
-
                         </div>
                     </form>
                 </div>
@@ -47,12 +38,6 @@
                                     {
                                         <li><a href="/TaiKhoans/DangNhap">Log In</a></li>
                                         <li><a class="custom-b" href="/TaiKhoans/DangKy">Sign Up</a></li>
-                                    }
-                                    else if (Session["Account"].ToString().Contains("admin"))
-                                    {
-                                        <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
-                                        <li><a href="/TaiKhoans/PageAdmin">Quản lý Admin</a></li>
-                                        <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
                                     }
                                     else
                                     {
@@ -70,18 +55,6 @@
                                 </ul>
                             </div>
                         </div>
-                        @if (Session["TaiKhoan"] != null && Session["Account"].ToString().Contains("admin"))
-                        {
-                            <div class="nav-b hidden-xs">
-                                <div class="nav-box">
-                                    <ul>
-                                        <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
-                                        <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
-                                        <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
@@ -91,10 +64,29 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    @RenderSection("upload", required: false)
 </body>
+<footer>
+    <div class="boxfooter1">
+        <h4>FOLLOW US</h4>
+        <div class="logo-footer">
+            <img src="~/images/icon/facebook.jpg" />
+            <img src="~/images/icon/insta.jpg" />
+        </div>
+    </div>
+    <div class="boxfooter2">
+        <h4>ABOUT US</h4>
+        <div class="add2">Bui Minh Nhat - 2011060734</div>
+        <div class="add2">Huynh Phuoc Dat - 2011062086</div>
+        <div class="add2">Vo Phan Truong Nguyen - 2011061720</div>
+    </div>
+    <div class="boxfooter3">
+        <h4>CONTACT US</h4>
+        <div class="add">Phone Number 1: 0901234565</div>
+        <div class="add">Phone Number 2: 0988778567</div>
+    </div>
+</footer>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+@RenderSection("upload", required: false)
 </html>
