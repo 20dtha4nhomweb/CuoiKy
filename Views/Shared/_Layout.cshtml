@@ -23,11 +23,18 @@
                     </div>
                     <form class="navbar-form navbar-left web-sh">
                         <div class="form">
-                            <input type="text" class="form-control" placeholder="Search for products or companies" @*value="search"*@>
+                            @*<div class="form-control" placeholder="Search for products or companies">
+                                @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                            </div>*@
+                            <div>
+                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"  @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                            </div>
+                            
                             @*<div style="text-align:center" class="form-group form-inline">
                                 Tìm kiếm: @Html.TextBox("SearchString", "", new { @class = "form-control" })
                                 <input type="submit" class="btn btn-default" value="Search" />
                             </div>*@
+
                         </div>
                     </form>
                 </div>
