@@ -63,6 +63,7 @@
                             <span class="label-input100">Mật khẩu</span>
                             <input class="input100" type="password" id="MatKhau" name="MatKhau" placeholder="Nhập mật khẩu của bạn">
                             <span class="focus-input100" data-symbol="&#xf190"></span>
+                            @ViewData["WeakPass"]
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Password is required">
@@ -95,7 +96,7 @@
 
                         <div class="wrap-input100 validate-input m-b-23" data-validate="Xin nhập ngày tháng năm sinh của bạn">
                             <span class="label-input100">Ngày tháng năm sinh</span>
-                            <input class="input100" type="text" id="NamSinh" name="NamSinh" placeholder="Nhập ngày tháng năm sinh của bạn MM/dd/yyyy">
+                            <input class="input100" type="text" id="NamSinh" name="NamSinh" placeholder="Nhập ngày tháng năm sinh ">
                             <span class="focus-input100" data-symbol="&#xf133"></span>
                             @ViewData["BirthWrong"]
                         </div>

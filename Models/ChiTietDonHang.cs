@@ -24,5 +24,10 @@ namespace CuoiKy.Models
         public virtual DonHang DonHang { get; set; }
 
         public virtual SanPham SanPham { get; set; }
+
+        public Double? ThanhTien
+        {
+            get { return SanPham.Gia * SoLuong; }
+        }
     }
 }

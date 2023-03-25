@@ -29,7 +29,7 @@
     <h2 style="text-align: center">Chi tiết sản phẩm</h2>
 
     <div>
-      
+
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -95,18 +95,29 @@
             <dd>
                 <img src="@Html.DisplayFor(model => model.HinhAnh)" alt="Alternate Text" width="20%" height="20%" />
             </dd>
-            @if (Model.SoLuongTon < 0)
-            {
-                <div>Đang tạm hết hàng</div>
-            }
+            <dt>
+                @if (Model.SoLuongTon != 0)
+                {
+                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = Model.MaSP, @strURL = Request.Url.ToString() })"><i class="fas fa-shopping-cart cart"></i></a>
+
+                }
+            </dt>
+
         </dl>
     </div>
 
 
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.MaSP }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", "Home")
     </p>
 
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

@@ -16,7 +16,7 @@ namespace CuoiKy.Controllers
 
         // GET: DanhMucs
         public ActionResult Index()
-        {
+        {           
             return View(db.DanhMucs.ToList());
         }
 
@@ -48,8 +48,14 @@ namespace CuoiKy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaDM,TenDanhMuc")] DanhMuc danhMuc)
         {
+            var tenDM = db.DanhMucs.FirstOrDefault(name=>name.TenDanhMuc.Contains(danhMuc.TenDanhMuc));
             if (ModelState.IsValid)
             {
+                if (tenDM != null)
+                {
+                    ViewData["NameExisted"] = "Tên danh mục đã tồn tại";
+                    return this.Create();
+                }                    
                 db.DanhMucs.Add(danhMuc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,8 +86,14 @@ namespace CuoiKy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaDM,TenDanhMuc")] DanhMuc danhMuc)
         {
+            var tenDM = db.DanhMucs.FirstOrDefault(name => name.TenDanhMuc.Contains(danhMuc.TenDanhMuc));
             if (ModelState.IsValid)
             {
+                if (tenDM != null)
+                {
+                    ViewData["NameExisted"] = "Tên danh mục đã tồn tại";
+                    return this.Create();
+                }
                 db.Entry(danhMuc).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

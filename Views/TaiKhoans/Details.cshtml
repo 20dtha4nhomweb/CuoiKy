@@ -25,7 +25,7 @@
 </head>
 
 <div class="box-container">
-    <h2>Chi tiết tài khoản</h2>
+    <h2 style="text-align:center">Chi tiết tài khoản</h2>
 
     <div>
         <hr />
@@ -109,3 +109,11 @@
         <div><a class="btn btn-success" href="@Url.Action("Index", "DonHangs", new {maTK = Model.MaTK})">Các đơn hàng đã thanh toán</a></div>
     </p>
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

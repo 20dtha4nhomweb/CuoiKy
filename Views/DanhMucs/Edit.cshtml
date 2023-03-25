@@ -38,10 +38,11 @@
             @Html.HiddenFor(model => model.MaDM)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TenDanhMuc,"Tên danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TenDanhMuc, "Tên danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TenDanhMuc, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TenDanhMuc, "", new { @class = "text-danger" })
+                    @ViewData["NameExisted"]
                 </div>
             </div>
 
@@ -61,3 +62,11 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

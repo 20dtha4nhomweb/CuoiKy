@@ -43,6 +43,7 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TenNhanHieu, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TenNhanHieu, "", new { @class = "text-danger" })
+                    @ViewData["NameExisted"]
                 </div>
             </div>
 
@@ -62,3 +63,11 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>
