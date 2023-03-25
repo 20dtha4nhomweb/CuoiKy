@@ -64,6 +64,7 @@ namespace CuoiKy.Controllers
             //lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.Find(s => s.MaSP == id);
             GioHang temp = new GioHang(id, maTK);
+            SanPham sl = data.SanPhams.FirstOrDefault(x => x.MaSP == id);
             if (sanpham == null)
             {
                 sanpham = new GioHang(id);
@@ -76,6 +77,10 @@ namespace CuoiKy.Controllers
             }
             else 
             {
+                if(sl.SoLuongTon == sanpham.SoLuong)
+                {                   
+                    return Redirect(strURL);
+                }
                 sanpham.SoLuong += 1;
                 lstGiohang.Add(sanpham);
                 temp.SoLuong = sanpham.SoLuong; ;
