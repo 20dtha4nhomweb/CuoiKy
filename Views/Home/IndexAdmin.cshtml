@@ -1,10 +1,9 @@
 ﻿@model PagedList.IPagedList<CuoiKy.Models.SanPham>
 @using PagedList.Mvc;
-<link href="~/Content/DropDown.css" rel="stylesheet" />
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
+
 <head>
     <meta charset="UTF-8">
     <title>Chamb - Responsive E-commerce HTML5 Template</title>
@@ -30,6 +29,61 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
 </head>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 left-rs">
+                <div class="navbar-header">
+                    <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/Home/Index" class="navbar-brand">Project</a>
+                </div>
+                <form class="navbar-form navbar-left web-sh">
+                    <div class="form">
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="right-nav">
+                    <div class="login-sr">
+                        <div class="login-signup">
+                            <ul>
+                                <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
+                                <li><a href="/TaiKhoans/PageAdmin">Quản lý Admin</a></li>
+                                <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    @*<div class="help-r hidden-xs">
+                        <div class="help-box">
+                            <ul>
+                                <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
+                                <li><a class="custom-b" href="/DonHangs?maTK=@Session["TaiKhoan"]">Đơn hàng</a></li>
+                            </ul>
+                        </div>
+                    </div>*@
+                    <div class="nav-b hidden-xs">
+                        <div class="nav-box">
+                            <ul>
+                                <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                                <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                                <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.container-fluid -->
+</nav>
 <div class="box-container">
     <div class="row">
         <section id="product1">
@@ -54,12 +108,7 @@
                                 <h4>@item.Gia VNĐ</h4>
                             </div>
                         </a>
-                        @if (item.SoLuongTon != 0)
-                        {
-                            <a href="@Url.Action("ThemGioHang","GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString()})"><i class="fas fa-shopping-cart cart"></i></a>
-
-                        }
-                        else
+                        @if (item.SoLuongTon == 0)
                         {
                             <h5>Đang tạm hết hàng</h5>
                         }
@@ -133,6 +182,4 @@
         display: none;
     }
 </style>
-
-
 
