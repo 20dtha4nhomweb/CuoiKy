@@ -32,10 +32,10 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MaDH)
+                Mã đơn hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayLap)
+                Ngày lập
             </th>
             <th>
                 Ngày giao
@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.TinhTrang)
                 </td>
                 <td>
-                    <a href="/ChiTietDonHangs/Index?maDH=@item.MaDH">Details</a>
+                    <a href="/ChiTietDonHangs/Index?maDH=@item.MaDH">Chi tiết đơn hàng</a>
                 </td>
                 <td>
                     @if (item.TinhTrang != "Đã nhận hàng")

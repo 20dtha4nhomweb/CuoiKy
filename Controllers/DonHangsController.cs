@@ -19,6 +19,10 @@ namespace CuoiKy.Controllers
         DataMyPhamContext data = new DataMyPhamContext();   
         public ActionResult Index(int ? maTK)
         {
+            if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
+            {
+                return RedirectToAction("DangNhap", "TaiKhoans");
+            }
             var donHangs = db.DonHangs.Where(d => d.TaiKhoan.MaTK==maTK);
             return View(donHangs.ToList());
         }
