@@ -1,0 +1,185 @@
+﻿@model PagedList.IPagedList<CuoiKy.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chamb - Responsive E-commerce HTML5 Template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/style.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+</head>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 left-rs">
+                <div class="navbar-header">
+                    <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/Home/Index" class="navbar-brand">Project</a>
+                </div>
+                <form class="navbar-form navbar-left web-sh">
+                    <div class="form">
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" @Html.TextBox("SearchString", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="right-nav">
+                    <div class="login-sr">
+                        <div class="login-signup">
+                            <ul>
+                                <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
+                                <li><a href="/TaiKhoans/PageAdmin">Quản lý Admin</a></li>
+                                <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    @*<div class="help-r hidden-xs">
+                        <div class="help-box">
+                            <ul>
+                                <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
+                                <li><a class="custom-b" href="/DonHangs?maTK=@Session["TaiKhoan"]">Đơn hàng</a></li>
+                            </ul>
+                        </div>
+                    </div>*@
+                    <div class="nav-b hidden-xs">
+                        <div class="nav-box">
+                            <ul>
+                                <li>@Html.ActionLink("Sản phẩm", "Index", "SanPhams")</li>
+                                <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
+                                <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.container-fluid -->
+</nav>
+<div class="box-container">
+    <div class="row">
+        <section id="product1">
+            @foreach (var item in Model)
+            {
+                <div class="pro-container" style="width: 22%">
+                    <div class="pro">
+                        <a href="/SanPhams/Details/@item.MaSP" style="width: 22%">
+                            <img src="@item.HinhAnh" alt="" />
+                            <div class="desc">
+                                <span>Nhãn hiệu: @item.NhanHieu.TenNhanHieu</span>
+                                <div><span>Danh mục: @item.DanhMuc.TenDanhMuc</span></div>
+                                <div><span>Số lượng: @item.SoLuongTon</span></div>
+                                <h5>@item.TenSanPham</h5>
+                                <div class="start">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </div>
+                                <h4>@item.Gia VNĐ</h4>
+                            </div>
+                        </a>
+                        @if (item.SoLuongTon == 0)
+                        {
+                            <h5>Đang tạm hết hàng</h5>
+                        }
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+    <div>
+        <div>
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+            @Model.PageCount
+        </div>
+        <div class="MenuTrang">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page = page
+            }))
+        </div>
+    </div>
+</div>
+
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append(' <a href="javascript:void(0);" class="readmore">đọc tiếp...</a>');
+                $(this).append('<span class="more-text">' + removedStr +
+                    '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap(); 27
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
+

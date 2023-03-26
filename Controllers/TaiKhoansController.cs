@@ -169,8 +169,15 @@ namespace CuoiKy.Controllers
                     tk.DiaChi = diachi;
                     data.TaiKhoans.Add(tk);
                     data.SaveChanges();
+
                     return RedirectToAction("Index","Home");                           
             }            
+
+                    return RedirectToAction("DangNhap");
+                }
+            }
+            return this.DangKy();
+
         }
 
         [HttpGet]
@@ -205,6 +212,12 @@ namespace CuoiKy.Controllers
                     return this.DangNhap();
                 }
             }                     
+
+                ViewData["ErrorPass"] = "Mật khẩu không đúng";
+                return this.DangNhap();
+            }
+            if (kh.PhanQuyen.Contains("admin"))
+                return RedirectToAction("IndexAdmin","Home");
             return RedirectToAction("Index", "Home");
         }
         public ActionResult Logout()
