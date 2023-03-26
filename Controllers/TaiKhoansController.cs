@@ -16,6 +16,11 @@ using System.Security.Claims;
 using static CuoiKy.Models.TaiKhoan;
 using System.Text.RegularExpressions;
 using System.ComponentModel.Design;
+using System.Net.Mail;
+using static System.Net.WebRequestMethods;
+using System.Web.Helpers;
+using System.Security.Principal;
+using System.Data.Entity.Migrations;
 
 namespace CuoiKy.Controllers
 {
@@ -104,7 +109,6 @@ namespace CuoiKy.Controllers
         [HttpPost]
         public ActionResult DangKy(FormCollection collection, TaiKhoan tk)
         {
-
             var tendangnhap = collection["TenDangNhap"];
             var matkhau = collection["MatKhau"];
             var MatKhauXacNhan = collection["MatKhauXacNhan"];
@@ -193,7 +197,8 @@ namespace CuoiKy.Controllers
             }
             if (kh != null)
             {
-                if(kh.MatKhau == matkhau)
+                bool verified = BCrypt.Net.BCrypt.Verify( matkhau, kh.MatKhau);
+                if (verified == true)
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh.MaTK;
@@ -263,11 +268,6 @@ namespace CuoiKy.Controllers
                 ViewData["MatKhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
                 return this.DangKy();
             }
-            if (!matchMail.Success)
-            {
-                ViewData["EmailWrong"] = "Email phải đúng định dạng";
-                return this.DangKyAdmin();
-            }
             if (int.Parse(dienthoai) != 0 && !matchPhone.Success)
             {
                 ViewData["NumWrong"] = "Num phải đúng định dạng";
@@ -284,19 +284,19 @@ namespace CuoiKy.Controllers
                 return this.DangKyAdmin();
             }            
             else
-            {    
-                
-                    tk.TenDangNhap = tendangnhap;
-                    tk.MatKhau = matkhau;
-                    tk.TenKhachHang = hoten;
-                    tk.Email = email;
-                    tk.SDT = dienthoai;
-                    tk.PhanQuyen = "admin";
-                    tk.NamSinh = DateTime.Parse(ngaysinh);
-                    tk.DiaChi = diachi;
-                    data.TaiKhoans.Add(tk);
-                    data.SaveChanges();
-                    return RedirectToAction("Index","Home");                
+            {
+                tk.TenDangNhap = tendangnhap;
+                tk.MatKhau = matkhau;
+                tk.MatKhau = BCrypt.Net.BCrypt.HashPassword(matkhau);
+                tk.TenKhachHang = hoten;
+                tk.Email = email;
+                tk.SDT = dienthoai;
+                tk.PhanQuyen = "admin";
+                tk.NamSinh = DateTime.Parse(ngaysinh);
+                tk.DiaChi = diachi;
+                data.TaiKhoans.Add(tk);
+                data.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
             
         }
@@ -307,7 +307,113 @@ namespace CuoiKy.Controllers
             var listAccount = data.TaiKhoans.OrderBy(s => s.PhanQuyen).ToList();
             return View(listAccount);
         }
+        public JsonResult SendOTP(TaiKhoan tk)
+        {
+            bool Valid = false;
+            TaiKhoan checkEmail = data.TaiKhoans.SingleOrDefault(x => x.Email == tk.Email && x.TenDangNhap == tk.TenDangNhap);
+            if (checkEmail != null)
+            {
+                Valid = true;
+                Random rand = new Random();
+                int OTP = rand.Next(100000, 1000000);
+                Session["OTP"] = OTP.ToString();
+                var fromAddress = new MailAddress("nguyentrongquy612@gmail.com");
+                var toAddress = new MailAddress(tk.Email);
+                const string fromPass = "lhfxhqggiwpxhqat";
+                const string subject = "OTP code";
+                string body = "Đây là mã xác thực của bạn:\nVui lòng không chia sẻ mã này cho bất kì ai khác:\n" + "\t" + OTP.ToString();
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPass),
+                    Timeout = 200000
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body,
+                })
+                {
+                    smtp.Send(message);
+                }
+            }
 
-        
+            return Json(Valid, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult RecoveryPass(TaiKhoan tk, FormCollection collection)
+        {
+            var otp = collection["OTP"];
+            var user = collection["User"];
+            string kq = "NotValid";
+            var checkMail = data.TaiKhoans.SingleOrDefault(x => x.Email == tk.Email);
+            if (Session["OTP"] == null)
+            {
+                kq = "WrongOTP";
+            }
+            else if (checkMail != null && otp == Session["OTP"].ToString())
+            {
+                kq = "Valid";
+                checkMail.MatKhau = BCrypt.Net.BCrypt.HashPassword(tk.MatKhau);
+                data.TaiKhoans.AddOrUpdate(checkMail);
+                data.SaveChanges();
+                Session.Clear();
+                Session.Abandon();
+            }
+            else if (otp != Session["OTP"].ToString())
+            {
+                kq = "WrongOTP";
+            }
+            return Json(kq, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RecoveyPassLayout()
+        {
+            return View();
+        }
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePass(FormCollection collection, int maTK)
+        {
+            var oldPass = collection["OldPass"];
+            var pass = collection["Password"];
+            var confirmPass = collection["ConfirmPass"];
+            TaiKhoan tk = data.TaiKhoans.FirstOrDefault(x => x.MaTK == maTK);
+            Regex regexPass = new Regex(@"(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})");
+            Match matchPass = regexPass.Match(pass);
+            bool verified = BCrypt.Net.BCrypt.Verify(oldPass, tk.MatKhau);
+            if(verified == true)
+            {
+                if (pass != confirmPass)
+                {
+                    ViewData["MatKhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
+                    return this.ChangePass();
+                }
+                if (!matchPass.Success)
+                {
+                    ViewData["WeakPass"] = "Mật khẩu phải có ít nhất 1 ký tự hoa, thường, dặc biệt, số và độ dài ngắn nhất bằng 8";
+                    return this.ChangePass();
+                }
+                tk.MatKhau = BCrypt.Net.BCrypt.HashPassword(pass);
+                data.TaiKhoans.AddOrUpdate(tk);
+                data.SaveChanges();
+                Session["TaiKhoan"] = null;
+                Session["User"] = null;
+                Session.Clear();
+                Logout();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewData["WrongOldPass"] = "Mật khẩu cũ bạn nhập hông có đúng!";
+                return this.ChangePass();
+            }
+        }
     }
 }

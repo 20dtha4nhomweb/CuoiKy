@@ -40,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/Home/Index" class="navbar-brand">Project</a>
+                    <a href="/Home/IndexAdmin" class="navbar-brand">Project</a>
                 </div>
                 <form class="navbar-form navbar-left web-sh">
                     <div class="form">
@@ -57,6 +57,7 @@
                             <ul>
                                 <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
                                 <li><a href="/TaiKhoans/PageAdmin">Quản lý Admin</a></li>
+                                <li><a href="/TaiKhoans/ChangePass?maTK=@Session["TaiKhoan"]">Pass</a></li>
                                 <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
                             </ul>
                         </div>

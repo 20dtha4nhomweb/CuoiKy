@@ -53,6 +53,16 @@ namespace CuoiKy.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(sanPham.SoLuongTon < 0)
+                {
+                    ViewData["ErrorSoLuong"] = "Số lượng không được âm";
+                    return this.Create();
+                }
+                if (sanPham.Gia < 1000)
+                {
+                    ViewData["ErrorGia"] = "Giá không được dưới 1000 VNĐ";
+                    return this.Create();
+                }
                 db.SanPhams.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,6 +99,16 @@ namespace CuoiKy.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (sanPham.SoLuongTon < 0)
+                {
+                    ViewData["ErrorSoLuong"] = "Số lượng không được âm";
+                    return this.Create();
+                }
+                if (sanPham.Gia < 1000)
+                {
+                    ViewData["ErrorGia"] = "Giá không được dưới 1000 VNĐ";
+                    return this.Create();
+                }
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
