@@ -48,8 +48,14 @@ namespace CuoiKy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNH,TenNhanHieu")] NhanHieu nhanHieu)
         {
+            var tenNH = db.NhanHieux.FirstOrDefault(name => name.TenNhanHieu.Contains(nhanHieu.TenNhanHieu));
             if (ModelState.IsValid)
             {
+                if(tenNH != null)
+                {
+                    ViewData["NameExisted"] = "Tên nhãn hiệu đã tồn tại";
+                    return this.Create();
+                }
                 db.NhanHieux.Add(nhanHieu);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,8 +86,14 @@ namespace CuoiKy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaNH,TenNhanHieu")] NhanHieu nhanHieu)
         {
+            var tenNH = db.NhanHieux.FirstOrDefault(name => name.TenNhanHieu.Contains(nhanHieu.TenNhanHieu));
             if (ModelState.IsValid)
             {
+                if (tenNH != null)
+                {
+                    ViewData["NameExisted"] = "Tên nhãn hiệu đã tồn tại";
+                    return this.Create();
+                }
                 db.Entry(nhanHieu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

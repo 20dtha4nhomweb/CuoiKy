@@ -25,7 +25,7 @@
 </head>
 
 <div class="box-container">
-    <h2>Create</h2>
+    <h2 style="text-align:center">Thêm danh mục mới</h2>
 
 
     @using (Html.BeginForm())
@@ -33,7 +33,6 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Danh mục</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -41,6 +40,7 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TenDanhMuc, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TenDanhMuc, "", new { @class = "text-danger" })
+                    @ViewData["NameExisted"]
                 </div>
             </div>
 
@@ -61,3 +61,11 @@
     }
 
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

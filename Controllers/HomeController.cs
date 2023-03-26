@@ -21,10 +21,11 @@ namespace CuoiKy.Controllers
             page = 1;
             if (SearchString == null || SearchString == "")
                 return View(all_SanPham.ToPagedList(pageNum, pageSize));
-            else if(all_SanPhamTK != null)
+            else if (all_SanPhamTK != null)
                 return View(all_SanPhamTK.ToPagedList(pageNum, pageSize));
             else
-                return View(all_SanPham.ToPagedList(pageNum, pageSize));
+                ViewData["Empty"] = "Không tìm thấy sản phẩm";
+            return View(all_SanPhamTK.ToPagedList(pageNum, pageSize));
         }
         public ActionResult IndexAdmin(int? page, string SearchString)
         {

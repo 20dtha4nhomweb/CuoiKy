@@ -1,4 +1,4 @@
-namespace CuoiKy.Models
+﻿namespace CuoiKy.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,14 +24,17 @@ namespace CuoiKy.Models
 
         public int? Ma_NH { get; set; }
 
+        [Required(ErrorMessage = "Không được đẻ trống")]
         [StringLength(100)]
         public string TenSanPham { get; set; }
 
         [StringLength(50)]
         public string Loai { get; set; }
 
+        [Required(ErrorMessage = "Không được đẻ trống")]
         public long? SoLuongTon { get; set; }
 
+        [Required(ErrorMessage = "Không được đẻ trống")]
         public double? Gia { get; set; }
 
         [StringLength(500)]

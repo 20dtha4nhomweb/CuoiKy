@@ -25,7 +25,7 @@ namespace CuoiKy.Models
         {
             modelBuilder.Entity<DanhGia>()
                 .Property(e => e.HinhAnh)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<DanhMuc>()
                 .HasMany(e => e.SanPhams)
@@ -44,7 +44,7 @@ namespace CuoiKy.Models
 
             modelBuilder.Entity<SanPham>()
                 .Property(e => e.HinhAnh)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<SanPham>()
                 .HasMany(e => e.ChiTietDonHangs)
@@ -63,24 +63,23 @@ namespace CuoiKy.Models
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.TenDangNhap)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.MatKhau)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.SDT)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.GioiTinh)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.PhanQuyen)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
                 .HasMany(e => e.DanhGias)

@@ -1,4 +1,4 @@
-namespace CuoiKy.Models
+﻿namespace CuoiKy.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace CuoiKy.Models
 
         [Key]
         public int MaDM { get; set; }
-
+        [Required(ErrorMessage = "Không được đẻ trống")]
         [StringLength(100)]
         public string TenDanhMuc { get; set; }
 

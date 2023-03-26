@@ -23,13 +23,19 @@
     <link rel="stylesheet" href="~/Content/MakeColor/css/slick.min.css">
     <!--responsive css-->
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
 </head>
 
 <div class="box-container">
     <h2 style="text-align: center">Chi tiết sản phẩm</h2>
 
     <div>
-      
+
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -95,18 +101,29 @@
             <dd>
                 <img src="@Html.DisplayFor(model => model.HinhAnh)" alt="Alternate Text" width="20%" height="20%" />
             </dd>
-            @if (Model.SoLuongTon < 0)
-            {
-                <div>Đang tạm hết hàng</div>
-            }
+            <dt>
+                @if (Model.SoLuongTon != 0)
+                {
+                    <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = Model.MaSP, @strURL = Request.Url.ToString() })"><i style="position: absolute; border: 1px solid #088178; padding: 10px 10px; border-radius: 50px; color: #e8f6ea; background: #e8f6ea;" class="fas fa-shopping-cart cart"></i></a>
+
+                }
+            </dt>
+
         </dl>
     </div>
 
 
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.MaSP }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", "Home")
     </p>
 
 </div>
+<style>
+    .box-container {
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
+        background: rgba(255,255,255, .8);
+    }
+</style>

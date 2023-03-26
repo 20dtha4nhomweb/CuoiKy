@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<CuoiKy.Models.SanPham>
 @using PagedList.Mvc;
-<link href="~/Content/DropDown.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,39 +33,47 @@
 <div class="box-container">
     <div class="row">
         <section id="product1">
+
             @foreach (var item in Model)
             {
-                <div class="pro-container" style="width: 22%">
-                    <div class="pro">
-                        <a href="/SanPhams/Details/@item.MaSP" style="width: 22%">
-                            <img src="@item.HinhAnh" alt="" />
-                            <div class="desc">
-                                <span>Nhãn hiệu: @item.NhanHieu.TenNhanHieu</span>
-                                <div><span>Danh mục: @item.DanhMuc.TenDanhMuc</span></div>
-                                <div><span>Số lượng: @item.SoLuongTon</span></div>
+                    <div class="pro-container" style="width: 22%">
+                        <div class="pro">
+                            <a href="/SanPhams/Details/@item.MaSP" style="width: 22%">
                                 <h5>@item.TenSanPham</h5>
-                                <div class="start">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half"></i>
-                                </div>
-                                <h4>@item.Gia VNĐ</h4>
-                            </div>
-                        </a>
-                        @if (item.SoLuongTon != 0)
-                        {
-                            <a href="@Url.Action("ThemGioHang","GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString()})"><i class="fas fa-shopping-cart cart"></i></a>
+                                <img src="@item.HinhAnh" alt="" />
+                                <div class="desc">
+                                    <span>Nhãn hiệu: @item.NhanHieu.TenNhanHieu</span>
+                                    <div><span>Danh mục: @item.DanhMuc.TenDanhMuc</span></div>
+                                    <div><span>Số lượng: @item.SoLuongTon</span></div>
 
-                        }
-                        else
-                        {
-                            <h5>Đang tạm hết hàng</h5>
-                        }
+                                    <div class="start">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half"></i>
+                                    </div>
+                                    <h4>@item.Gia VNĐ</h4>
+                                </div>
+                            </a>
+                            @if (item.SoLuongTon != 0)
+                            {
+                                <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })"><i  class="IconHover fas fa-shopping-cart cart"></i></a>
+
+                            }
+                            else
+                            {
+                                <h6>Đang tạm hết hàng</h6>
+                            }
+                        </div>
                     </div>
-                </div>
-            }
+                }
+
+
+
+
+
+
         </section>
     </div>
     <div>

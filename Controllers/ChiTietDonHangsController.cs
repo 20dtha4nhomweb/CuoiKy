@@ -16,7 +16,7 @@ namespace CuoiKy.Controllers
 
         // GET: ChiTietDonHangs
         public ActionResult Index(int ? maDH)
-        {
+        {          
             var chiTietDonHangs = db.ChiTietDonHangs.Include(c => c.DonHang).Include(c => c.SanPham).Where(c => c.MaDH ==maDH);
             return View(chiTietDonHangs.ToList());
         }
