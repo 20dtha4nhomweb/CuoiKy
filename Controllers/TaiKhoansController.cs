@@ -134,10 +134,8 @@ namespace CuoiKy.Controllers
                     tk.PhanQuyen = "user";
                     tk.NamSinh = DateTime.Parse(ngaysinh);
                     tk.DiaChi = diachi;
-
                     data.TaiKhoans.Add(tk);
                     data.SaveChanges();
-
                     return RedirectToAction("DangNhap");
                 }
             }
