@@ -39,9 +39,9 @@
                     <div class="pro-container" style="width: 22%">
                         <div class="pro">
                             <a href="/SanPhams/Details/@item.MaSP" style="width: 22%">
-                                <h5>@item.TenSanPham</h5>
                                 <img src="@item.HinhAnh" alt="" />
                                 <div class="desc">
+                                    <span><h4 style="text-align:center">@item.TenSanPham</h4></span>
                                     <span>Nhãn hiệu: @item.NhanHieu.TenNhanHieu</span>
                                     <div><span>Danh mục: @item.DanhMuc.TenDanhMuc</span></div>
                                     <div><span>Số lượng: @item.SoLuongTon</span></div>
@@ -58,7 +58,7 @@
                             </a>
                             @if (item.SoLuongTon != 0)
                             {
-                                <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })"><i  class="IconHover fas fa-shopping-cart cart"></i></a>
+                                <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })"><i class="fas fa-shopping-cart cart"></i></a>
 
                             }
                             else
