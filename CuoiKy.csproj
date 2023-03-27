@@ -326,11 +326,6 @@
     <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="Content\images\bg-01.jpg" />
     <Content Include="Content\images\icons\favicon.ico" />
-    <Content Include="Content\images\sanpham1.jpg" />
-    <Content Include="Content\images\sanpham2.jpg" />
-    <Content Include="Content\images\sanpham3.jpg" />
-    <Content Include="Content\images\sanpham4.jpg" />
-    <Content Include="Content\images\sanpham4.png" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\main.css" />
     <Content Include="Content\MakeColor\css\animate-wow.css" />
