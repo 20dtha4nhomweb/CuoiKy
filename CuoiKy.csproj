@@ -324,6 +324,7 @@
     <Content Include="Content\fonts\iconic\css\material-design-iconic-font.css" />
     <Content Include="Content\fonts\iconic\css\material-design-iconic-font.min.css" />
     <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\Footer.css" />
     <Content Include="Content\images\bg-01.jpg" />
     <Content Include="Content\images\fb.png" />
     <Content Include="Content\images\icons\favicon.ico" />

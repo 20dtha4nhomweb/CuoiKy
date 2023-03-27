@@ -164,7 +164,7 @@ namespace CuoiKy.Controllers
             else
             {             
                     tk.TenDangNhap = tendangnhap;
-                    tk.MatKhau = matkhau;
+                    tk.MatKhau = BCrypt.Net.BCrypt.HashPassword(matkhau);
                     tk.TenKhachHang = hoten;
                     tk.Email = email;
                     tk.SDT = dienthoai;
@@ -173,7 +173,6 @@ namespace CuoiKy.Controllers
                     tk.DiaChi = diachi;
                     data.TaiKhoans.Add(tk);
                     data.SaveChanges();
-
                     return RedirectToAction("Index","Home");                           
             }            
 
