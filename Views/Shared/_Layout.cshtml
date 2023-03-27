@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -81,29 +87,160 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-</body>
-<footer>
-    <div class="boxfooter1">
-        <h4>FOLLOW US</h4>
-        <div class="logo-footer">
-            <img src="~/images/icon/facebook.jpg" />
-            <img src="~/images/icon/insta.jpg" />
+    <footer class="footer-20192">
+        <div class="row-footer" style="display:flex; justify-content:space-between">
+            <div class="col1-sm">
+                <h3>About Us</h3>
+                <ul class="list-unstyled links">
+                    <li><a href="#">Nguyễn Trọng Quý - Leader</a></li>
+                    <li><a href="#">Nguyễn Gia Huy </a></li>
+                    <li><a href="#">Phan Thành Phát </a></li>
+                    <li><a href="#">Huỳnh Công Tuấn </a></li>
+                </ul>
+            </div>
+            <div class="col1-sm">
+                <h3>MSSV</h3>
+                <ul class="list-unstyled links">
+                    <li>2011064460</li>
+                    <li>2011062563</li>
+                    <li>2011068881</li>
+                    <li>2011061242</li>
+                </ul>
+            </div>
+            <div class="col1-sm">
+                <h3>Giảng viên hướng dẫn</h3>
+                <ul class="list-unstyled links">
+                    <li><a href="#">Thạc sĩ</a></li>
+                    <li>Nguyễn Mạnh Hùng</li>
+                </ul>
+            </div>
+            <div class="col1-md-3">
+                <h3>Follow us</h3>
+                <ul class="list-unstyled social">
+                    <li><a href="https://www.facebook.com/profile.php?id=100006794611487"><span class="icon-facebook"><img src="~/Content/images/fb.png" alt="Alternate Text" /></span></a></li>
+                    <li><a href="https://www.instagram.com/ntq612/"><span class="icon-twitter"><img src="~/Content/images/instagram.png" alt="Alternate Text" /></span></a></li>
+                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
+                    <li><a href="#"><span class="icon-medium"></span></a></li>
+                    <li><a href="#"><span class="icon-paper-plane"></span></a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="boxfooter2">
-        <h4>ABOUT US</h4>
-        <div class="add2">Bui Minh Nhat - 2011060734</div>
-        <div class="add2">Huynh Phuoc Dat - 2011062086</div>
-        <div class="add2">Vo Phan Truong Nguyen - 2011061720</div>
-    </div>
-    <div class="boxfooter3">
-        <h4>CONTACT US</h4>
-        <div class="add">Phone Number 1: 0901234565</div>
-        <div class="add">Phone Number 2: 0988778567</div>
-    </div>
-</footer>
+    </footer>
+</body>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 @RenderSection("upload", required: false)
 </html>
+<style>
+    .row-footer{
+        display:flex;
+        /*align-content: center;*/
+        align-items: center;
+        text-align:center;
+        justify-content:space-between;
+    }
+    .footer-20192 {
+        position: relative;
+        color: #fff;
+        padding: 1rem 0;
+        background-color: #141d2a;
+        display:block;
+    }
+
+        .footer-20192 .container {
+            position: relative;
+        }
+
+        .footer-20192 h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-top: 0;
+            line-height: 1.5;
+        }
+
+        .footer-20192 .links li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            display: block;
+        }
+
+            .footer-20192 .links li a {
+                color: #666873;
+            }
+
+                .footer-20192 .links li a:hover {
+                    color: #fff;
+                }
+
+        .footer-20192 .social li {
+            display: inline-block;
+            position: relative;
+        }
+
+            .footer-20192 .social li a {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+                background-color: #8186d5;
+                color: #fff;
+            }
+
+                .footer-20192 .social li a > span {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+        .footer-20192 .footer-logo {
+            color: #fff;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+        }
+
+        .footer-20192 .copyright {
+            color: #666873;
+        }
+
+        .footer-20192 .cta {
+            -webkit-box-shadow: -20px -20px 0 0 rgba(52, 58, 64, 0.2);
+            box-shadow: -20px -20px 0 0 rgba(52, 58, 64, 0.2);
+            padding: 20px;
+            background-color: #8186d5;
+            top: -150px;
+            position: relative;
+        }
+
+            .footer-20192 .cta h2, .footer-20192 .cta h3 {
+                line-height: 1.5;
+            }
+
+            .footer-20192 .cta h3 {
+                font-size: 20px;
+            }
+    .col1-sm {
+        position: relative;
+        width: 700%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .col1-md-3 {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    
+</style>
