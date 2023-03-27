@@ -22,16 +22,10 @@
     <!--responsive css-->
     <link rel="stylesheet" href="~/Content/MakeColor/css/responsive.css">
 </head>
-<h2>Đơn hàng đã được xác nhận</h2>
-<h3>Chúng tôi sẽ giao hàng cho bạn sớm nhất có thể !</h3>
-<p>
-    @Html.ActionLink("Về trang chủ", "Index", "Home")
-</p>
-<style>
-    .box-container {
-        padding: 25px 20px;
-        border-radius: 10px;
-        box-shadow: 0 0.5rem 1rem rgba(0,0,0, .5);
-        background: rgba(255,255,255, .8);
-    }
-</style>
+<div class="box-container">
+    <h2 style="text-align: center">Đơn hàng đã được xác nhận</h2>
+    <h3 style="text-align: center">Chúng tôi sẽ giao hàng cho bạn sớm nhất có thể !</h3>
+    <p>
+        @Html.ActionLink("Về trang chủ", "Index", "Home")
+    </p>
+</div>

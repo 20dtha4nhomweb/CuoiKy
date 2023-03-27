@@ -62,7 +62,7 @@
                                 <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = item.MaSP, @strURL = Request.Url.ToString() })"><i class="fas fa-shopping-cart cart"></i></a>
 
                             }
-                            else
+                            else if(item.SoLuongTon == 0)
                             {
                                 <h6>Đang tạm hết hàng</h6>
                             }
