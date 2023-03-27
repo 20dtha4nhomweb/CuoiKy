@@ -100,14 +100,15 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.HinhAnh, "Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { disable = "disable", @readonly = "readonly", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
-                    <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
-                    <input type="button" id="btnUpload" value="Chọn ảnh" class="btn btn-danger" onclick="" />
-                    <div style="padding:2rem 0">
-                        <img src="@Model.HinhAnh" style="border-radius:10px" id="pictureUpload" width="20%" height="20%" />
-                    </div>
-                </div>
+                    <a href="" style="display: none">@Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { disable = "disable", @readonly = "readonly", @class = "form-control" } })</a>
+                                        @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                                        <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                                        <input type="button" id="btnUpload" value="Chọn ảnh" class="btn btn-danger" onclick="" />
+                                        <div><img style="border-radius:10px" id="pictureUpload" width="20%" height="20%" src="@Model.HinhAnh" /></div>
+                                        <div style="padding:2rem 0">
+                                            <img src="" style="border-radius:10px" id="pictureUpload" width="20%" height="20%" />
+                                        </div>
+</div>
             </div>
             @section upload
             {

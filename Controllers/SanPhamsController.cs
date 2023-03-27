@@ -102,12 +102,12 @@ namespace CuoiKy.Controllers
                 if (sanPham.SoLuongTon < 0)
                 {
                     ViewData["ErrorSoLuong"] = "Số lượng không được âm";
-                    return this.Create();
+                    return this.Edit(sanPham.MaSP);
                 }
                 if (sanPham.Gia < 1000)
                 {
                     ViewData["ErrorGia"] = "Giá không được dưới 1000 VNĐ";
-                    return this.Create();
+                    return this.Edit(sanPham.MaSP);
                 }
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
