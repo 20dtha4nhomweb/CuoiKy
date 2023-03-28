@@ -97,7 +97,6 @@ namespace CuoiKy.Controllers
                     ViewData["NumWrong"] = "Số điện thoại phải đúng định dạng";
                     return this.Edit(taiKhoan.MaTK);
                 }
-
                 if (DateTime.Parse(ngaysinh) > DateTime.Parse(now))
                 {
                     ViewData["BirthWrong"] = "Ngày sinh phải bé hơn ngày hiện tại";
