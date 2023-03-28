@@ -21,6 +21,7 @@ using static System.Net.WebRequestMethods;
 using System.Web.Helpers;
 using System.Security.Principal;
 using System.Data.Entity.Migrations;
+using Microsoft.Ajax.Utilities;
 
 namespace CuoiKy.Controllers
 {
@@ -72,11 +73,40 @@ namespace CuoiKy.Controllers
         {
             if (ModelState.IsValid)
             {
+                var email = taiKhoan.Email;
+                var dienthoai = taiKhoan.SDT;
+                if(taiKhoan.TenKhachHang.IsNullOrWhiteSpace()  || taiKhoan.Email.IsNullOrWhiteSpace() || taiKhoan.SDT.IsNullOrWhiteSpace() || 
+                    taiKhoan.GioiTinh.IsNullOrWhiteSpace() || taiKhoan.NamSinh.ToString().IsNullOrWhiteSpace() || taiKhoan.DiaChi.IsNullOrWhiteSpace())
+                {
+                    ViewData["NotNull"] = "Không được trống";
+                    return this.Edit(taiKhoan.MaTK);
+                }
+                var ngaysinh = String.Format("{0:MM/dd/yyyy}", taiKhoan.NamSinh);
+                var now = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
+                Regex regexMail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match matchMail = regexMail.Match(email);
+                Regex regexPhone = new Regex(@"^(84|0[3|5|7|8|9])+([0-9]{8})\b");
+                Match matchPhone = regexPhone.Match(dienthoai);
+                if (!matchMail.Success)
+                {
+                    ViewData["EmailWrong"] = "Email phải đúng định dạng";
+                    return this.Edit(taiKhoan.MaTK);
+                }
+                if (/*int.Parse(dienthoai) != 0 &&*/ !matchPhone.Success)
+                {
+                    ViewData["NumWrong"] = "Số điện thoại phải đúng định dạng";
+                    return this.Edit(taiKhoan.MaTK);
+                }
+
+                if (DateTime.Parse(ngaysinh) > DateTime.Parse(now))
+                {
+                    ViewData["BirthWrong"] = "Ngày sinh phải bé hơn ngày hiện tại";
+                    return this.Edit(taiKhoan.MaTK);
+                }
                 data.Entry(taiKhoan).State = EntityState.Modified;
                 data.SaveChanges();
-                return RedirectToAction("PageAdmin");
             }
-            return View(taiKhoan);
+            return RedirectToAction("Details","TaiKhoans",new {@id = taiKhoan.MaTK});
         }
         public ActionResult Delete(int? id)
         {
