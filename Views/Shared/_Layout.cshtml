@@ -10,6 +10,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
 
+    @*foneawesome custom link*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
     <link href="~/Content/Footer.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -58,7 +61,6 @@
                                         <li><a href="/TaiKhoans/Details/@Session["TaiKhoan"]">Xin chào @Session["User"]</a></li>
                                         <li><a href="/TaiKhoans/ChangePass">Đổi mật khẩu</a></li>
                                         <li><a class="custom-b" href="/TaiKhoans/Logout">Log out</a></li>
-
                                     }
                                 </ul>
                             </div>
@@ -72,9 +74,23 @@
                                         <li>@Html.ActionLink("Danh mục", "Index", "DanhMucs")</li>
                                         <li>@Html.ActionLink("Nhãn hiệu", "Index", "NhanHieux")</li>
                                     }
+                                    else if (Session["TaiKhoan"] != null)
+                                    {
+                                    <li>
+                                        @*<a class="custom-b" href="/GioHang/GioHang">@Html.Action("GioHangPartial", "GioHang")</a>*@
+
+                                        <a href="/GioHang/GioHang" class="btn-cart">
+                                            <div class="fa-solid fa-cart-shopping icon-cart">
+                                                <span class="countCart">@Html.Action("GiohangPartial", "GioHang")</span>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                        <li><a class="custom-b" href="/DonHangs?maTK=@Session["TaiKhoan"]">Đơn hàng</a></li>
+                                    }
                                     else
                                     {
-                                        <li><a class="custom-b" href="/GioHang/GioHang">Giỏ hàng</a></li>
+                                        <li><a class="custom-b" href="/GioHang/GioHang">Giỏ Hàng</a></li>
                                         <li><a class="custom-b" href="/DonHangs?maTK=@Session["TaiKhoan"]">Đơn hàng</a></li>
                                     }
                                 </ul>
@@ -128,6 +144,27 @@
             </div>
         </div>
     </footer>
+
+    <style>
+        .btn-cart .icon-cart {
+            font-size: 22px;
+            position: relative;
+        }
+
+            .btn-cart .icon-cart .countCart {
+                position: absolute;
+                top: -11px;
+                right: -14px;
+                padding: 0.5rem;
+                font-size: 15px;
+                background: #09294c;
+                color: #fff;
+                border-radius: 5rem;
+                width: 2.3rem;
+                height: 2.3rem;
+                text-align: center;
+            }
+    </style>
 </body>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
